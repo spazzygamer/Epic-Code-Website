@@ -334,6 +334,81 @@ replaceWordsWithCheeks(document.body);
   setTimeout(() => emoji.remove(), 5000);
 }, 75);
 </p>
+<h1>Explosive Clicks</h1>
+<p>document.addEventListener('click', e => {
+  for (let i = 0; i < 20; i++) {
+    const particle = document.createElement('div');
+    particle.textContent = '💥';
+    particle.style.position = 'fixed';
+    particle.style.left = `${e.clientX}px`;
+    particle.style.top = `${e.clientY}px`;
+    particle.style.fontSize = '16px';
+    particle.style.transition = 'transform 1s, opacity 1s';
+    particle.style.pointerEvents = 'none';
+    document.body.appendChild(particle);
+    const angle = Math.random() * 2 * Math.PI;
+    const distance = Math.random() * 200;
+    const x = Math.cos(angle) * distance;
+    const y = Math.sin(angle) * distance;
+    setTimeout(() => {
+      particle.style.transform = `translate(${x}px, ${y}px) scale(2)`;
+      particle.style.opacity = '0';
+    }, 10);
+    setTimeout(() => particle.remove(), 1000);
+  }
+});
+</p>
+<h1>Bubbles</h1>
+<p>const bubbleContainer = document.createElement('div');
+bubbleContainer.style.position = 'fixed';
+bubbleContainer.style.top = '0';
+bubbleContainer.style.left = '0';
+bubbleContainer.style.pointerEvents = 'none';
+document.body.appendChild(bubbleContainer);
+
+const createBubble = () => {
+  const bubble = document.createElement('div');
+  bubble.style.position = 'absolute';
+  bubble.style.width = `${Math.random() * 30 + 10}px`;
+  bubble.style.height = bubble.style.width;
+  bubble.style.borderRadius = '50%';
+  bubble.style.backgroundColor = 'rgba(0, 0, 255, 0.5)';
+  bubble.style.left = `${Math.random() * window.innerWidth}px`;
+  bubble.style.bottom = `0px`;
+  bubble.style.animation = 'moveUp 5s linear infinite';
+  bubbleContainer.appendChild(bubble);
+
+  setTimeout(() => {
+    bubble.remove();
+  }, 5000);
+};
+
+setInterval(createBubble, 200);
+</p>
+<h1>Click light</h1>
+<p>document.addEventListener('click', (e) => {
+  const lightRing = document.createElement('div');
+  lightRing.style.position = 'absolute';
+  lightRing.style.width = '50px';
+  lightRing.style.height = '50px';
+  lightRing.style.borderRadius = '50%';
+  lightRing.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
+  lightRing.style.left = `${e.clientX - 25}px`;
+  lightRing.style.top = `${e.clientY - 25}px`;
+  lightRing.style.transition = 'transform 1s, opacity 1s';
+  document.body.appendChild(lightRing);
+
+  setTimeout(() => {
+    lightRing.style.transform = 'scale(10)';
+    lightRing.style.opacity = '0';
+  }, 10);
+
+  setTimeout(() => {
+    if (lightRing.parentElement) lightRing.remove();
+  }, 1000);
+});
+</p>
+    <h1></h1>
     <script src="index.js"></script>
 </body>
 </html>
