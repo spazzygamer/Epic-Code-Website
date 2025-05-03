@@ -10,7 +10,7 @@ Change Text:
 $0.textContent = 'PUT TEXT HERE';
 
 Text Color Change
-$0.style.setProperty('color', 'Put color here', 'important');
+$0.style.setProperty('color', 'PUT COLOR HERE', 'important');
 
 Explosion:
 const e=document.createElement('div');e.style.position='fixed';e.style.top='50%';e.style.left='50%';e.style.width='300px';e.style.height='300px';e.style.marginLeft='-150px';e.style.marginTop='-150px';e.style.background='radial-gradient(circle, orange, red, black)';e.style.borderRadius='50%';e.style.zIndex='99999';e.style.boxShadow='0 0 100px 50px red';e.style.opacity='1';e.style.transition='all 2s ease-out';document.body.appendChild(e);const f=document.createElement('div');f.style.position='fixed';f.style.top=0;f.style.left=0;f.style.width='100%';f.style.height='100%';f.style.background='white';f.style.zIndex='99998';f.style.opacity='0.9';f.style.transition='opacity 1s';document.body.appendChild(f);setTimeout(()=>{f.style.opacity='0';setTimeout(()=>f.remove(),1000)},1000);const s=document.createElement('audio');s.src='https://www.myinstants.com/media/sounds/explosion.mp3';s.volume=1;s.autoplay=true;document.body.appendChild(s);let i=0;const shake=setInterval(()=>{document.body.style.marginLeft=(Math.random()*30-15)+'px';document.body.style.marginTop=(Math.random()*30-15)+'px';i++;if(i>30){clearInterval(shake);document.body.style.marginLeft='0';document.body.style.marginTop='0'}},50);setTimeout(()=>{e.style.opacity='0';e.style.transform='scale(6)'},500);setTimeout(()=>{e.remove()},3000);
