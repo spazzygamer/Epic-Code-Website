@@ -288,7 +288,18 @@
                                   });
                                 }, 100);
                                 </p>
-                        
+                        <h1>Change Every Word</h1>
+                                    <p>function replaceWordsWithCheeks(node) {
+  const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, null, false);
+  let currentNode;
+  while (currentNode = walker.nextNode()) {
+    if (currentNode.nodeValue.trim()) {
+      currentNode.nodeValue = currentNode.nodeValue.replace(/\b\w+\b/g, 'PUT WORD HERE');
+    }
+  }
+}
+replaceWordsWithCheeks(document.body);
+</p>
     <script src="index.js"></script>
 </body>
 </html>
