@@ -1,8 +1,13 @@
+
+
+WARNING DO NOT COPY NAMES OR : AND READ IF THERE ARE ANY MESSAGES
+
+
 Laser Outline:
 $0.style.setProperty('outline', '4px dashed rgba(255, 0, 0, 0.8)', 'important'); $0.style.setProperty('background-color', 'transparent', 'important'); $0.style.setProperty('color', 'black', 'important'); $0.style.setProperty('transition', 'transform 0.2s ease', 'important'); $0.style.setProperty('transform', 'scale(1.05)', 'important');
 
 Change Text:
-$0.textContent = 'Put message here';
+$0.textContent = 'PUT TEXT HERE';
 
 Text Color Change
 $0.style.setProperty('color', 'Put color here', 'important');
