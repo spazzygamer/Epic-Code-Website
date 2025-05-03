@@ -3,7 +3,8 @@ body{
     -webkit-text-fill-color: darkorange;
     -webkit-text-stroke-color:darkorange;
     background-color: black;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+   
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -12,12 +13,7 @@ body{
 #searchInput {
     padding: 10px;
     font-size: 16px;
-}
-
-#searchButton {
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
+    margin: 20px;
 }
 
 #content {
@@ -27,5 +23,4 @@ body{
 .item {
     font-size: 20px;
     margin: 10px 0;
-    display: none; /* Hide items by default */
 }
