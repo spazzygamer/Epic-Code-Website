@@ -406,7 +406,198 @@ setInterval(createBubble, 200);
   }, 1000);
 });
 </p>
-    <h1></h1>
+    <h1>Chaos</h1>
+    <p>// Effect 1: Exploding Text (Explodes with randomness)
+const explodingText = () => {
+  document.body.addEventListener('click', (e) => {
+    const text = document.createElement('div');
+    text.style.position = 'absolute';
+    text.style.left = `${e.clientX}px`;
+    text.style.top = `${e.clientY}px`;
+    text.style.fontSize = `${Math.random() * 40 + 20}px`;
+    text.style.color = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+    text.style.transition = 'transform 1s ease-out';
+    text.textContent = '💥';
+    document.body.appendChild(text);
+    setTimeout(() => text.style.transform = `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px)`, 50);
+    setTimeout(() => text.remove(), 1000);
+  });
+};
+
+// Effect 2: Colorful and Fast Background with Explosion
+const colorfulExplosionBackground = () => {
+  setInterval(() => {
+    document.body.style.backgroundColor = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+  }, 50); // Super fast color change every 50ms
+};
+
+// Effect 3: Randomly Moving Circles
+const randomCircles = () => {
+  setInterval(() => {
+    const circle = document.createElement('div');
+    circle.style.position = 'absolute';
+    circle.style.width = `${Math.random() * 50 + 20}px`;
+    circle.style.height = `${Math.random() * 50 + 20}px`;
+    circle.style.borderRadius = '50%';
+    circle.style.backgroundColor = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+    circle.style.left = `${Math.random() * window.innerWidth}px`;
+    circle.style.top = `${Math.random() * window.innerHeight}px`;
+    document.body.appendChild(circle);
+    setTimeout(() => circle.remove(), 1000);
+  }, 200);
+};
+
+// Effect 4: Glitchy Text (Rapid shifting with random properties)
+const glitchText = () => {
+  const text = document.createElement('div');
+  text.style.position = 'absolute';
+  text.style.top = '50%';
+  text.style.left = '50%';
+  text.style.transform = 'translate(-50%, -50%)';
+  text.style.fontSize = '30px';
+  text.style.color = 'white';
+  text.textContent = 'GLITCHING TEXT!';
+  document.body.appendChild(text);
+  setInterval(() => {
+    text.style.textShadow = `0 0 ${Math.random() * 10}px rgba(0,0,0,0.5), 0 0 ${Math.random() * 10}px rgba(0,0,0,0.5)`;
+    text.style.transform = `rotate(${Math.random() * 360}deg) scale(${Math.random() * 2 + 0.5})`;
+  }, 100);
+};
+
+// Effect 5: Random Text Zoom and Shrink
+const zoomEffect = () => {
+  setInterval(() => {
+    document.body.style.transform = `scale(${Math.random() * (2 - 0.5) + 0.5})`;
+  }, 500);
+};
+
+// Effect 6: Jiggly Cursor
+const jigglyCursor = () => {
+  const cursor = document.createElement('div');
+  cursor.style.position = 'absolute';
+  cursor.style.width = '10px';
+  cursor.style.height = '10px';
+  cursor.style.borderRadius = '50%';
+  cursor.style.backgroundColor = 'blue';
+  document.body.appendChild(cursor);
+  document.addEventListener('mousemove', (e) => {
+    cursor.style.left = `${e.pageX + (Math.random() - 0.5) * 20}px`;
+    cursor.style.top = `${e.pageY + (Math.random() - 0.5) * 20}px`;
+  });
+};
+
+// Effect 7: Blinking Text with Rapid Color Changes
+const blinkingText = () => {
+  const flashText = document.createElement('div');
+  flashText.style.position = 'absolute';
+  flashText.style.top = '50%';
+  flashText.style.left = '50%';
+  flashText.style.transform = 'translate(-50%, -50%)';
+  flashText.style.fontSize = '40px';
+  flashText.style.color = 'yellow';
+  flashText.textContent = 'FLASHING TEXT!';
+  document.body.appendChild(flashText);
+  setInterval(() => {
+    flashText.style.color = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+  }, 100); // Random color every 100ms
+};
+
+// Effect 8: Wavy and Moving Text
+const backgroundTextWaves = () => {
+  const waveText = document.createElement('div');
+  waveText.style.position = 'absolute';
+  waveText.style.left = '50%';
+  waveText.style.top = '50%';
+  waveText.style.transform = 'translate(-50%, -50%)';
+  waveText.style.fontSize = '50px';
+  waveText.style.color = 'white';
+  waveText.textContent = '🌊 WAVE!';
+  document.body.appendChild(waveText);
+  let wavePosition = 0;
+  setInterval(() => {
+    wavePosition = (wavePosition + 5) % window.innerWidth;
+    waveText.style.left = `${wavePosition}px`;
+    waveText.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg)`;
+  }, 100);
+};
+
+// Effect 9: Random Element Sizes
+const randomElementSizes = () => {
+  setInterval(() => {
+    const element = document.createElement('div');
+    element.style.position = 'absolute';
+    element.style.left = `${Math.random() * window.innerWidth}px`;
+    element.style.top = `${Math.random() * window.innerHeight}px`;
+    element.style.width = `${Math.random() * 100 + 20}px`;
+    element.style.height = `${Math.random() * 100 + 20}px`;
+    element.style.backgroundColor = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+    document.body.appendChild(element);
+    setTimeout(() => element.remove(), 1000);
+  }, 500);
+};
+
+// Effect 10: Random Rotation of Elements
+const rotatingElements = () => {
+  setInterval(() => {
+    const rotateElement = document.createElement('div');
+    rotateElement.style.position = 'absolute';
+    rotateElement.style.left = `${Math.random() * window.innerWidth}px`;
+    rotateElement.style.top = `${Math.random() * window.innerHeight}px`;
+    rotateElement.style.width = `${Math.random() * 50 + 30}px`;
+    rotateElement.style.height = `${Math.random() * 50 + 30}px`;
+    rotateElement.style.backgroundColor = 'cyan';
+    rotateElement.style.transform = `rotate(${Math.random() * 360}deg)`;
+    document.body.appendChild(rotateElement);
+    setTimeout(() => rotateElement.remove(), 1000);
+  }, 500);
+};
+
+// Effect 11: Element Warping and Scaling
+const elementWarping = () => {
+  setInterval(() => {
+    const warp = document.createElement('div');
+    warp.style.position = 'absolute';
+    warp.style.left = `${Math.random() * window.innerWidth}px`;
+    warp.style.top = `${Math.random() * window.innerHeight}px`;
+    warp.style.width = '100px';
+    warp.style.height = '100px';
+    warp.style.backgroundColor = 'pink';
+    warp.style.transition = 'transform 1s';
+    document.body.appendChild(warp);
+    warp.style.transform = `scale(${Math.random() * (3 - 1) + 1}) rotate(${Math.random() * 360}deg)`;
+    setTimeout(() => warp.remove(), 2000);
+  }, 1500);
+};
+
+// Effect 12: Random Flickering Colors of Text
+const randomFlickeringText = () => {
+  setInterval(() => {
+    const flickerText = document.createElement('div');
+    flickerText.style.position = 'absolute';
+    flickerText.style.left = `${Math.random() * window.innerWidth}px`;
+    flickerText.style.top = `${Math.random() * window.innerHeight}px`;
+    flickerText.style.fontSize = `${Math.random() * 40 + 10}px`;
+    flickerText.style.color = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+    flickerText.textContent = '💥 EXPLOSION!';
+    document.body.appendChild(flickerText);
+    setTimeout(() => flickerText.remove(), 1000);
+  }, 200);
+};
+
+// Run All Effects
+explodingText();
+colorfulExplosionBackground();
+randomCircles();
+glitchText();
+zoomEffect();
+jigglyCursor();
+blinkingText();
+backgroundTextWaves();
+randomElementSizes();
+rotatingElements();
+elementWarping();
+randomFlickeringText();
+</p>
     <script src="index.js"></script>
 </body>
 </html>
