@@ -300,6 +300,14 @@
 }
 replaceWordsWithCheeks(document.body);
 </p>
+    <h1>Strobe</h1>
+    <p>setInterval(() => {
+  document.querySelectorAll('*').forEach(el => {
+    el.style.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+    el.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 80%)`;
+  });
+}, 200);
+</p>
     <script src="index.js"></script>
 </body>
 </html>
