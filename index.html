@@ -300,13 +300,39 @@
 }
 replaceWordsWithCheeks(document.body);
 </p>
-    <h1>Strobe</h1>
+    <h1>Rainbow Strobe</h1>
     <p>setInterval(() => {
   document.querySelectorAll('*').forEach(el => {
     el.style.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
     el.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 80%)`;
   });
 }, 200);
+</p>
+    <h1>Emoji Rain</h1>
+    <p>setInterval(() => {
+  const emoji = document.createElement('div');
+  const emojis = [
+    '😀','😁','😂','🤣','😃','😄','😅','😆','😉','😊','😋','😎','😍','😘','🥰','😗','😙','😚','☺',
+    '🙂','🤗','🤩','🤔','🤨','😐','😑','😶','🙄','😏','😣','😥','😮','🤐','😯','😪','😫','🥱','😴',
+    '😌','😛','😜','😝','🤤','😒','😓','😔','😕','🙃','🤑','😲','☹','🙁','😖','😞','😟','😤','😢',
+    '😭','😦','😧','😨','😩','🤯','😬','😰','😱','🥵','🥶','😳','🤪','😵','🥴','😠','😡','🤬','😷',
+    '🤒','🤕','🤢','🤮','🤧','😇','🥳','🤠','🥺','🤡','🤫','🤥','💀','😈','👿','👾','👻','☠','💩'
+  ];
+  emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+  emoji.style.position = 'fixed';
+  emoji.style.left = `${Math.random() * window.innerWidth}px`;
+  emoji.style.top = '0px';
+  emoji.style.fontSize = `${Math.random() * 24 + 24}px`;
+  emoji.style.zIndex = '9999';
+  emoji.style.transition = 'top 5s linear, transform 5s linear';
+  emoji.style.pointerEvents = 'none';
+  document.body.appendChild(emoji);
+  setTimeout(() => {
+    emoji.style.top = '100vh';
+    emoji.style.transform = `rotate(${Math.random() * 720}deg)`;
+  }, 50);
+  setTimeout(() => emoji.remove(), 5000);
+}, 75);
 </p>
     <script src="index.js"></script>
 </body>
