@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epic Code Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button onclick="document.location='https://www.w3schools.com/JS/js_syntax.asp'">Java Script Words</button>
+    <button onclick="document.location='https://hackertyper.net/#'">Hacker Type</button>
+    
+
+    <h1>Laser Outline
+    </h1>
+    <p>$0.style.setProperty('outline', '4px dashed rgba(255, 0, 0, 0.8)', 'important');
+        $0.style.setProperty('background-color', 'transparent', 'important');
+        $0.style.setProperty('color', 'black', 'important');
+        $0.style.setProperty('transition', 'transform 0.2s ease', 'important');
+        $0.style.setProperty('transform', 'scale(1.05)', 'important');
+        </p>
+        <h1>Change Text</h1>
+        <p>$0.textContent = 'Put message here';
+        </p>
+        <h1>Text Color Change</h1>
+        <p>$0.style.setProperty('color', 'Put color here', 'important');
+        </p>
+        <h1>Explosion</h1>
+        <p>const e=document.createElement('div');e.style.position='fixed';e.style.top='50%';e.style.left='50%';e.style.width='300px';e.style.height='300px';e.style.marginLeft='-150px';e.style.marginTop='-150px';e.style.background='radial-gradient(circle, orange, red, black)';e.style.borderRadius='50%';e.style.zIndex='99999';e.style.boxShadow='0 0 100px 50px red';e.style.opacity='1';e.style.transition='all 2s ease-out';document.body.appendChild(e);const f=document.createElement('div');f.style.position='fixed';f.style.top=0;f.style.left=0;f.style.width='100%';f.style.height='100%';f.style.background='white';f.style.zIndex='99998';f.style.opacity='0.9';f.style.transition='opacity 1s';document.body.appendChild(f);setTimeout(()=>{f.style.opacity='0';setTimeout(()=>f.remove(),1000)},1000);const s=document.createElement('audio');s.src='https://www.myinstants.com/media/sounds/explosion.mp3';s.volume=1;s.autoplay=true;document.body.appendChild(s);let i=0;const shake=setInterval(()=>{document.body.style.marginLeft=(Math.random()*30-15)+'px';document.body.style.marginTop=(Math.random()*30-15)+'px';i++;if(i>30){clearInterval(shake);document.body.style.marginLeft='0';document.body.style.marginTop='0'}},50);setTimeout(()=>{e.style.opacity='0';e.style.transform='scale(6)'},500);setTimeout(()=>{e.remove()},3000);
+        </p>
+            <h1>Freeze</h1>
+            <p>const freeze=document.createElement('div');freeze.style.position='fixed';freeze.style.top=0;freeze.style.left=0;freeze.style.width='100%';freeze.style.height='100%';freeze.style.zIndex='999999';freeze.style.background='rgba(173,216,230,0.85)';freeze.style.backdropFilter='blur(8px) saturate(0.5)';freeze.style.pointerEvents='all';freeze.style.cursor='not-allowed';document.body.appendChild(freeze);document.body.style.overflow='hidden';
+            </p>
+                <h1>Fake Blue Screen</h1>
+                <p>const d=document.createElement('div');d.style.position='fixed';d.style.top='0';d.style.left='0';d.style.width='100vw';d.style.height='100vh';d.style.backgroundColor='#00008B';d.style.color='white';d.style.fontFamily='Consolas, monospace';d.style.fontSize='20px';d.style.zIndex='999999';d.style.textAlign='center';d.style.paddingTop='20%';const t=document.createElement('pre');t.textContent=`A problem has been detected and Windows has been shut down to prevent damage to your computer.
+
+                    STOP: 0x0000007B (0xFFFFFA80023F47F0, 0xFFFFFFFFC0000034, 0x0000000000000000, 0x0000000000000000)
+                    
+                    If this is the first time you've seen this Stop error screen, restart your computer. If this screen appears again, follow these steps:
+                    
+                    Check for viruses on your computer. Remove any newly installed hard drives or hard drive controllers. Check your hard drive to make sure it is properly configured and terminated. Run CHKDSK /F to check for hard drive corruption, and then restart your computer.
+                    
+                    Technical information:
+                    *** STOP: 0x0000007B (0xFFFFFA80023F47F0, 0xFFFFFFFFC0000034, 0x0000000000000000, 0x0000000000000000)`;t.style.whiteSpace='pre-wrap';t.style.wordWrap='break-word';d.appendChild(t);document.body.appendChild(d);const a=new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAIlYAAESsAAACABAAZGF0YYQAAAAA');a.play();
+                    
+                    </p>
+                    <h1>Loading</h1>
+                    <p>const loader=document.createElement('div');loader.style.position='fixed';loader.style.top='0';loader.style.left='0';loader.style.width='100vw';loader.style.height='100vh';loader.style.backgroundColor='rgba(0, 0, 0, 0.5)';loader.style.display='flex';loader.style.alignItems='center';loader.style.justifyContent='center';loader.style.zIndex='9999';const spinner=document.createElement('div');spinner.style.border='8px solid #f3f3f3';spinner.style.borderTop='8px solid #3498db';spinner.style.borderRadius='50%';spinner.style.width='50px';spinner.style.height='50px';spinner.style.animation='spin 2s linear infinite';loader.appendChild(spinner);document.body.appendChild(loader);const style=document.createElement('style');style.innerHTML='@keyframes spin {0% {transform: rotate(0deg);} 100% {transform: rotate(360deg);}}';document.head.appendChild(style);setTimeout(()=>{loader.style.display='none';},5000);
+                    </p>
+                    <h1>Rain</h1>
+                    <p>function createRaindrop() {
+                        const raindrop = document.createElement('div');
+                        raindrop.style.position = 'absolute';
+                        raindrop.style.width = '4px';
+                        raindrop.style.height = '20px';
+                        raindrop.style.backgroundColor = 'rgba(0, 0, 255, 0.5)';
+                        raindrop.style.left = `${Math.random() * window.innerWidth}px`;
+                        raindrop.style.top = `-${Math.random() * 200}px`;
+                        document.body.appendChild(raindrop);
+                    
+                        const speed = Math.random() * 5 + 5;
+                    
+                        function fall() {
+                            raindrop.style.top = `${parseFloat(raindrop.style.top) + speed}px`;
+                    
+                            if (parseFloat(raindrop.style.top) > document.documentElement.scrollHeight) {
+                                raindrop.remove();
+                            }
+                        }
+                    
+                        setInterval(fall, 10);
+                    }
+                    
+                    setInterval(createRaindrop, 20);
+                    </p>
+                    <h1>Washing Machine</h1>
+                    <p>const elements = document.querySelectorAll('*');
+                        const getRandom = (min, max) => Math.random() * (max - min) + min;
+                        const applyWeirdMovement = () => {
+                            elements.forEach(element => {
+                                const translateX = getRandom(-500, 500);
+                                const translateY = getRandom(-500, 500);
+                                const rotateDeg = getRandom(-360, 360);
+                                element.style.transform = `translate(${translateX}px, ${translateY}px) rotate(${rotateDeg}deg)`;
+                                const randomColor = `rgb(${Math.floor(getRandom(0, 255))}, ${Math.floor(getRandom(0, 255))}, ${Math.floor(getRandom(0, 255))})`;
+                                element.style.color = randomColor;
+                            });
+                        };
+                        setInterval(applyWeirdMovement, 100);
+                        </p>
+                        <h1>Bouncy Balls</h1>
+                        <p>const createFlyingBalls = () => {
+                            const gravity = 0.5;
+                            const friction = 0.9;
+                            const ballSizeMin = 20;
+                            const ballSizeMax = 40;
+                            const balls = [];
+                        
+                            const createBall = () => {
+                                const ball = document.createElement('div');
+                                ball.style.position = 'absolute';
+                                const size = Math.floor(Math.random() * (ballSizeMax - ballSizeMin + 1)) + ballSizeMin;
+                                ball.style.width = `${size}px`;
+                                ball.style.height = ball.style.width;
+                                ball.style.backgroundColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+                                ball.style.borderRadius = '50%';
+                                ball.style.left = `${Math.floor(Math.random() * window.innerWidth)}px`;
+                                ball.style.top = `-100px`;
+                                document.body.appendChild(ball);
+                        
+                                ball.velocityX = Math.random() * 4 - 2;
+                                ball.velocityY = Math.random() * 4 - 2;
+                                ball.velocityZ = 0;
+                                ball.position = { x: Math.random() * window.innerWidth, y: -100 };
+                                ball.size = size;
+                                ball.createdAt = Date.now();
+                        
+                                balls.push(ball);
+                        
+                                const moveBall = () => {
+                                    ball.velocityZ += gravity;
+                                    ball.position.x += ball.velocityX;
+                                    ball.position.y += ball.velocityY;
+                                    ball.position.y += ball.velocityZ;
+                        
+                                    if (ball.position.x + ball.size > window.innerWidth || ball.position.x < 0) {
+                                        ball.velocityX *= -1;
+                                    }
+                        
+                                    if (ball.position.y + ball.size > window.innerHeight || ball.position.y < 0) {
+                                        ball.velocityY *= -1;
+                                    }
+                        
+                                    if (ball.position.y + ball.size > window.innerHeight - 50) {
+                                        ball.position.y = window.innerHeight - 50 - ball.size;
+                                        ball.velocityZ *= -friction;
+                                    }
+                        
+                                    ball.style.left = `${ball.position.x}px`;
+                                    ball.style.top = `${ball.position.y}px`;
+                        
+                                    requestAnimationFrame(moveBall);
+                                };
+                        
+                                const makeBallFly = () => {
+                                    const randomDirectionX = Math.random() * 5 - 2.5;
+                                    const randomDirectionY = Math.random() * 5 - 2.5;
+                                    ball.velocityX += randomDirectionX;
+                                    ball.velocityY += randomDirectionY;
+                                };
+                        
+                                setInterval(makeBallFly, 1000);
+                        
+                                moveBall();
+                            };
+                        
+                            for (let i = 0; i < 300; i++) {
+                                createBall();
+                            }
+                        
+                            setInterval(() => {
+                                for (let i = 0; i < 50; i++) {
+                                    createBall();
+                                }
+                            }, 1000);
+                        
+                            setInterval(() => {
+                                const now = Date.now();
+                                balls.forEach((ball, index) => {
+                                    if (now - ball.createdAt > 10000) {
+                                        document.body.removeChild(ball);
+                                        balls.splice(index, 1);
+                                    }
+                                });
+                            }, 1000);
+                        };
+                        
+                        createFlyingBalls();
+                        </p>
+                        <h1>Mouse Trail</h1>
+                        <p>const createSnakeCursor = () => {
+                            let snake = [];
+                            const snakeLength = 50;
+                            document.body.addEventListener('mousemove', (e) => {
+                                const cursor = document.createElement('div');
+                                cursor.style.position = 'absolute';
+                                cursor.style.width = '10px';
+                                cursor.style.height = '10px';
+                                cursor.style.backgroundColor = 'PUT COLOR HERE';
+                                cursor.style.borderRadius = '50%';
+                                cursor.style.left = `${e.clientX}px`;
+                                cursor.style.top = `${e.clientY}px`;
+                                document.body.appendChild(cursor);
+                                snake.push(cursor);
+                                if (snake.length > snakeLength) {
+                                    document.body.removeChild(snake.shift());
+                                }
+                            });
+                        };
+                        createSnakeCursor();
+                        </p>
+                        <h1>Black Hole Mouse</h1>
+                        <p>const hole = document.createElement('div');
+                            hole.style.position = 'fixed';
+                            hole.style.width = '80px';
+                            hole.style.height = '80px';
+                            hole.style.borderRadius = '50%';
+                            hole.style.background = 'radial-gradient(circle, black 0%, transparent 80%)';
+                            hole.style.pointerEvents = 'none';
+                            hole.style.zIndex = '99999';
+                            document.body.appendChild(hole);
+                            
+                            document.addEventListener('mousemove', (e) => {
+                              hole.style.left = `${e.clientX - 40}px`;
+                              hole.style.top = `${e.clientY - 40}px`;
+                            
+                              document.querySelectorAll('body *').forEach(el => {
+                                if (
+                                  el === hole ||
+                                  el.tagName === 'SCRIPT' ||
+                                  el.tagName === 'STYLE' ||
+                                  el.tagName === 'HTML' ||
+                                  el.tagName === 'BODY'
+                                ) return;
+                            
+                                const rect = el.getBoundingClientRect();
+                                const dx = e.clientX - (rect.left + rect.width / 2);
+                                const dy = e.clientY - (rect.top + rect.height / 2);
+                                const distance = Math.sqrt(dx * dx + dy * dy);
+                            
+                                if (distance < 100) {
+                                  el.style.transition = 'transform 0.4s ease-out, opacity 0.4s ease-out';
+                                  el.style.transform = `translate(${dx * 0.5}px, ${dy * 0.5}px) scale(0.2) rotate(360deg)`;
+                                  el.style.opacity = '0';
+                                  el.style.pointerEvents = 'none';
+                                  setTimeout(() => {
+                                    if (el.parentNode) el.remove();
+                                  }, 400);
+                                }
+                              });
+                            });
+                            </p>
+                            <h1>Black Hole</h1>
+                            <p>const hole = document.createElement('div');
+                                hole.style.position = 'fixed';
+                                hole.style.width = '300px';
+                                hole.style.height = '300px';
+                                hole.style.left = '50%';
+                                hole.style.top = '50%';
+                                hole.style.transform = 'translate(-50%, -50%)';
+                                hole.style.borderRadius = '50%';
+                                hole.style.background = 'radial-gradient(circle at center, black 0%, #111 70%, transparent 100%)';
+                                hole.style.pointerEvents = 'none';
+                                hole.style.zIndex = '99999';
+                                hole.style.mixBlendMode = 'multiply';
+                                document.body.appendChild(hole);
+                                
+                                const holeCenterX = window.innerWidth / 2;
+                                const holeCenterY = window.innerHeight / 2;
+                                
+                                setInterval(() => {
+                                  document.querySelectorAll('body *').forEach(el => {
+                                    if (
+                                      el === hole ||
+                                      el.tagName === 'SCRIPT' ||
+                                      el.tagName === 'STYLE' ||
+                                      el.tagName === 'HTML' ||
+                                      el.tagName === 'BODY'
+                                    ) return;
+                                
+                                    const rect = el.getBoundingClientRect();
+                                    const elCenterX = rect.left + rect.width / 2;
+                                    const elCenterY = rect.top + rect.height / 2;
+                                
+                                    const dx = holeCenterX - elCenterX;
+                                    const dy = holeCenterY - elCenterY;
+                                    const distance = Math.sqrt(dx * dx + dy * dy);
+                                
+                                    if (distance < 300) {
+                                      el.style.transition = 'transform 0.5s ease-out, opacity 0.5s ease-out';
+                                      el.style.transform = `translate(${dx * 0.3}px, ${dy * 0.3}px) scale(0.2) rotate(720deg)`;
+                                      el.style.opacity = '0';
+                                      el.style.pointerEvents = 'none';
+                                      setTimeout(() => {
+                                        if (el.parentElement) el.remove();
+                                      }, 500);
+                                    }
+                                  });
+                                }, 100);
+                                </p>
+                        
+    <script src="index.js"></script>
+</body>
+</html>
