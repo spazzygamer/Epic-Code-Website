@@ -578,7 +578,47 @@ document.body.innerHTML = '';
     clock.textContent = now.toLocaleTimeString();
   }, 1000);
 })();
-</p>       
+</p>
+    <h1>Code Guess</h1>
+    <p>(function() {
+  const input = document.createElement('input');
+  input.placeholder = 'Enter secret code...';
+  input.style.position = 'fixed';
+  input.style.top = '50px';
+  input.style.left = '10px';
+  input.style.zIndex = 99999;
+  input.style.padding = '5px';
+
+  document.body.appendChild(input);
+
+  input.addEventListener('change', () => {
+    const code = input.value.toLowerCase();
+    if (code === 'explode') {
+      alert('💥 Boom!');
+      document.body.style.transition = 'all 0.3s';
+      document.body.style.transform = 'rotate(10deg) scale(1.1)';
+      setTimeout(() => {
+        document.body.style.transform = 'none';
+      }, 300);
+    } else if (code === 'party') {
+      alert('🎉 Party mode!');
+      document.body.style.animation = 'party 0.5s infinite';
+      const style = document.createElement('style');
+      style.innerHTML = `@keyframes party {
+        0% { background-color: red; }
+        25% { background-color: yellow; }
+        50% { background-color: green; }
+        75% { background-color: blue; }
+        100% { background-color: purple; }
+      }`;
+      document.head.appendChild(style);
+    } else {
+      alert('❌ Invalid code');
+    }
+    input.value = '';
+  });
+})();
+</p>
     <script src="index.js"></script>
 </body>
 </html>
