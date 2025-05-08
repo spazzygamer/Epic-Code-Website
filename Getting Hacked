@@ -1,0 +1,304 @@
+(function() {
+  const style = document.createElement('style');
+  style.innerHTML = `
+    body {
+      overflow: hidden; /* Prevent scrolling */
+    }
+
+    #hacked-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.9);
+      color: #00ff00;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 36px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      opacity: 0;
+      transform: scale(1.2);
+      animation: fadeIn 1.5s ease-out forwards, scaleUp 1s ease-out 1.5s forwards;
+      overflow: hidden;
+    }
+
+    #hacked-overlay h1 {
+      margin: 0;
+      padding: 0;
+      text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00;
+      animation: typewriter 3s steps(50) 1s forwards, flicker 0.1s infinite, rotate 3s linear infinite;
+    }
+
+    #hacked-overlay p {
+      font-size: 24px;
+      margin-top: 20px;
+      opacity: 0;
+      animation: fadeInText 4s ease-out 1.5s forwards, flicker 0.1s infinite;
+    }
+
+    .weird-effect {
+      font-size: 18px;
+      animation: weirdEffect 1s ease-out infinite;
+      color: red;
+      font-weight: bold;
+      text-shadow: 0 0 10px red, 0 0 20px red;
+      opacity: 0;
+      animation-delay: 5s;
+    }
+
+    .scrolling-text {
+      position: fixed;
+      top: 90%;
+      left: 100%;
+      font-size: 18px;
+      color: red;
+      font-weight: bold;
+      animation: scrollText 10s linear infinite;
+      text-shadow: 0 0 5px red, 0 0 10px red;
+    }
+
+    .glitch {
+      position: relative;
+      display: inline-block;
+      animation: glitch 1s infinite;
+    }
+
+    .green-text {
+      color: green !important;
+      animation: fadeInGreen 3s ease-out forwards;
+      font-size: 24px;
+      font-weight: bold;
+      text-shadow: 0 0 10px green;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes scaleUp {
+      from {
+        transform: scale(1.2);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes typewriter {
+      from {
+        width: 0;
+      }
+      to {
+        width: 100%;
+      }
+    }
+
+    @keyframes flicker {
+      0% {
+        opacity: 0.1;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0.1;
+      }
+    }
+
+    @keyframes fadeInText {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes weirdEffect {
+      0% {
+        transform: rotate(0deg);
+        color: red;
+        text-shadow: 0 0 10px red;
+      }
+      25% {
+        transform: rotate(3deg);
+        color: yellow;
+        text-shadow: 0 0 10px yellow;
+      }
+      50% {
+        transform: rotate(-3deg);
+        color: green;
+        text-shadow: 0 0 10px green;
+      }
+      75% {
+        transform: rotate(6deg);
+        color: blue;
+        text-shadow: 0 0 10px blue;
+      }
+      100% {
+        transform: rotate(0deg);
+        color: red;
+        text-shadow: 0 0 10px red;
+      }
+    }
+
+    @keyframes glitch {
+      0% {
+        transform: translateX(0) skewX(0deg);
+        clip-path: inset(0 0 0 0);
+        opacity: 1;
+      }
+      20% {
+        transform: translateX(-5px) skewX(-3deg);
+        clip-path: inset(20% 0 60% 0);
+        opacity: 0.7;
+      }
+      40% {
+        transform: translateX(5px) skewX(3deg);
+        clip-path: inset(60% 0 20% 0);
+        opacity: 0.7;
+      }
+      60% {
+        transform: translateX(-5px) skewX(-3deg);
+        clip-path: inset(30% 0 50% 0);
+        opacity: 0.7;
+      }
+      80% {
+        transform: translateX(5px) skewX(3deg);
+        clip-path: inset(50% 0 30% 0);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateX(0) skewX(0deg);
+        clip-path: inset(0 0 0 0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes scrollText {
+      from {
+        left: 100%;
+      }
+      to {
+        left: -100%;
+      }
+    }
+
+    @keyframes randomColorChange {
+      0% {
+        color: red;
+      }
+      25% {
+        color: blue;
+      }
+      50% {
+        color: green;
+      }
+      75% {
+        color: yellow;
+      }
+      100% {
+        color: pink;
+      }
+    }
+
+    @keyframes fadeInGreen {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  const overlay = document.createElement('div');
+  overlay.id = 'hacked-overlay';
+  overlay.innerHTML = `
+    <h1 class="glitch">YOU'VE BEEN HACKED</h1>
+    <p>System breach detected. Please stand by...</p>
+    <p class="weird-effect">Breaching Data Stores...</p>
+    <p class="weird-effect">Stealing Cookies...</p>
+    <p class="weird-effect">Informing Data...</p>
+    <p class="weird-effect">Locating Address...</p>
+    <p class="weird-effect">IP = 192.483.246.1222</p>
+    <p class="weird-effect">Entering Hack Mode...</p>
+    <p class="weird-effect">Open Console</p>
+  `;
+  document.body.appendChild(overlay);
+
+  setTimeout(() => {
+    overlay.style.display = 'none';
+    triggerWeirdEffects();
+    addScrollingText(); // Add scrolling text after initial message
+    addGreenText(); // Add green text at the end
+  }, 15000); // Hacked message disappears after 15 seconds
+
+  function triggerWeirdEffects() {
+    // Add glitch effect to the body
+    document.body.classList.add('glitch');
+    setTimeout(() => {
+      // Adding more weird and glitchy text after the first glitchy effect
+      addGlitchText("Hacking Target Systems...");
+      addGlitchText("Bypassing Security Protocols...");
+      addGlitchText("Breaching Firewall...");
+      addGlitchText("System Lockdown in Progress...");
+      addGlitchText("Critical Error: Unauthorized Access Detected!");
+      addRandomColorText("Malware Detected: Critical Failure");
+    }, 2000);
+  }
+
+  function addGlitchText(text) {
+    const glitchText = document.createElement('div');
+    glitchText.classList.add('weird-effect');
+    glitchText.innerHTML = text;
+    document.body.appendChild(glitchText);
+  }
+
+  function addRandomColorText(text) {
+    const colorText = document.createElement('div');
+    colorText.classList.add('weird-effect');
+    colorText.innerHTML = text;
+    colorText.style.animation = 'randomColorChange 1s infinite';
+    document.body.appendChild(colorText);
+  }
+
+  function addScrollingText() {
+    const scrollingText = document.createElement('div');
+    scrollingText.classList.add('scrolling-text');
+    scrollingText.innerHTML = '>> SYSTEM ERROR: Unauthorized operations detected! <<';
+    document.body.appendChild(scrollingText);
+
+    // Add more text that scrolls across the screen
+    setTimeout(() => {
+      const additionalText = document.createElement('div');
+      additionalText.classList.add('scrolling-text');
+      additionalText.innerHTML = '>> WARNING: Malware execution in progress... <<';
+      document.body.appendChild(additionalText);
+    }, 2000);
+  }
+
+  function addGreenText() {
+    const greenText = document.createElement('div');
+    greenText.classList.add('green-text');
+    greenText.innerHTML = '>> SYSTEM ACCESS GRANTED: Target successfully compromised <<';
+    document.body.appendChild(greenText);
+
+    setTimeout(() => {
+      const finalText = document.createElement('div');
+      finalText.classList.add('green-text');
+      finalText.innerHTML = '>> CONNECTION TERMINATED: SYSTEM RESET IN PROGRESS <<';
+      document.body.appendChild(finalText);
+    }, 3000);
+  }
+})();
