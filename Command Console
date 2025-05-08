@@ -1,0 +1,43 @@
+(function() {
+  window.openControl = () => {
+    const panel = document.createElement('div');
+    panel.style.position = 'fixed';
+    panel.style.top = '50px';
+    panel.style.left = '50px';
+    panel.style.width = '300px';
+    panel.style.padding = '20px';
+    panel.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    panel.style.color = 'white';
+    panel.style.fontFamily = 'monospace';
+    panel.style.zIndex = '10000';
+    panel.style.borderRadius = '10px';
+    panel.style.boxShadow = '0px 0px 10px rgba(0, 255, 0, 0.6)';
+    panel.innerHTML = `
+      <h2>Console Command Panel</h2>
+      <label for="commandInput">Enter command:</label>
+      <input type="text" id="commandInput" placeholder="Type a command..." style="width: 100%; padding: 10px;">
+      <button id="executeBtn" style="width: 100%; margin-top: 10px; padding: 10px; background-color: #28a745; color: white; border: none; cursor: pointer;">Execute</button>
+      <div id="output" style="margin-top: 10px; color: #ccc;"></div>
+    `;
+    document.body.appendChild(panel);
+
+    const executeBtn = document.getElementById('executeBtn');
+    const commandInput = document.getElementById('commandInput');
+    const output = document.getElementById('output');
+
+    executeBtn.addEventListener('click', () => {
+      const command = commandInput.value.trim();
+      if (command) {
+        output.textContent = `Executing: ${command}`;
+        // Example commands
+        if (command === 'hack') {
+          output.textContent = 'Hacking... You are now in control.';
+        } else if (command === 'status') {
+          output.textContent = 'System Status: All systems operational.';
+        } else {
+          output.textContent = `Unknown command: ${command}`;
+        }
+      }
+    });
+  };
+})();
