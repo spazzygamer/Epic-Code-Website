@@ -620,9 +620,51 @@ document.body.innerHTML = '';
   });
 })();
 </p>
-    
-    
-    
+    <h1>Scramble Everything</h1>
+    <p>(() => {
+  const shuffle = () => Math.random() > 0.5 ? 1 : -1;
+  const textNodes = [];
+  const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+  while (walk.nextNode()) textNodes.push(walk.currentNode);
+
+  textNodes.forEach(node => {
+    if (node.nodeValue.trim()) {
+      const chars = node.nodeValue.split('');
+      chars.sort(shuffle);
+      node.nodeValue = chars.join('');
+    }
+  });
+})();
+</p>
+    <h1>Magnet Cursor</h1>
+    <p>(() => {
+  document.querySelectorAll('p, h1, h2, h3, a, img, button').forEach(el => {
+    el.style.transition = 'transform 0.2s ease-out';
+    document.addEventListener('mousemove', e => {
+      const rect = el.getBoundingClientRect();
+      const dx = e.clientX - (rect.left + rect.width / 2);
+      const dy = e.clientY - (rect.top + rect.height / 2);
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 100) {
+        el.style.transform = `translate(${dx * 0.1}px, ${dy * 0.1}px)`;
+      } else {
+        el.style.transform = '';
+      }
+    });
+  });
+})();
+</p>
+    <h1>EveryThing Falls</h1>
+    <p>(() => {
+  document.querySelectorAll('body *').forEach(el => {
+    if (!['SCRIPT', 'STYLE'].includes(el.tagName)) {
+      el.style.transition = 'transform 2s ease-in';
+      el.style.transform = `translateY(${window.innerHeight + 500}px) rotate(${Math.random() * 360}deg)`;
+    }
+  });
+})();
+</p>
+    <h1></h1>
     <script src="index.js"></script>
 </body>
 </html>
