@@ -549,6 +549,9 @@ setInterval(() => {
   setTimeout(() => flickerText.remove(), 1000);
 }, 200);
 </p>
+    <h1>Cool Text Hack Thing</h1>
+    <p>const s=document.createElement('style');s.innerHTML=`body{animation:flicker 0.15s infinite alternate;background:black!important;color:#0ff!important;font-family:monospace!important}*{transition:all 0.1s ease!important}@keyframes flicker{0%{opacity:1}100%{opacity:0.97}}.scanlines::before{content:'';position:fixed;top:0;left:0;height:100%;width:100%;pointer-events:none;background-image:repeating-linear-gradient(to bottom,rgba(0,0,0,0.2),rgba(0,0,0,0.2)1px,transparent 1px,transparent 3px);z-index:9999;mix-blend-mode:multiply}`;document.head.appendChild(s);document.body.classList.add('scanlines');const g=setInterval(()=>{document.querySelectorAll('body *').forEach(e=>{if(['SCRIPT','STYLE'].includes(e.tagName)||e===document.body||e===document.documentElement)return;if(Math.random()<0.15){e.style.transform=`translate(${Math.random()*10-5}px,${Math.random()*10-5}px) skew(${Math.random()*5}deg)`;e.style.color=`hsl(${Math.random()*360},100%,80%)`}if(Math.random()<0.05&&e.innerText.length>5){e.innerText=e.innerText.split('').map(c=>Math.random()<0.3?String.fromCharCode(33+Math.random()*94):c).join('')}});if(Math.random()<0.05){document.body.style.backgroundColor=`rgb(${Math.random()*30},${Math.random()*30},${Math.random()*30})`}},80);
+    </p>
     <script src="index.js"></script>
 </body>
 </html>
