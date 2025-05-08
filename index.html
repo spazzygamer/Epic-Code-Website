@@ -560,268 +560,137 @@ document.body.style.color = 'black';
 document.body.innerHTML = '';
 </p>
     <h1>Menu Warning Is Very Bad</h1>
-    <p>"(function() {
-  const style = document.createElement('style');
-  style.innerHTML = `
-    .menu {
-      position: fixed;
-      top: 100px;
-      right: 10px;
-      background: orange;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      z-index: 100;
-      font-size: 16px;
-      width: 250px;
-      cursor: move;
-      user-select: none;
-      height: 500px; /* Set a fixed height */
-      overflow-y: auto; /* Make the menu scrollable */
-      pointer-events: auto; /* Ensure that menu interactions are always active */
-      background-color: orange !important; /* Prevent inheritance issues */
-    }
+    <p>(function() {
+  // Check if the script is being executed from the browser console
+  if (typeof console !== 'undefined' && typeof console.log !== 'undefined') {
+    const style = document.createElement('style');
+    style.innerHTML = `
+      .menu {
+        position: fixed;
+        top: 100px;
+        right: 10px;
+        background: orange;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        z-index: 100000; /* High z-index to make sure it's on top of everything else */
+        font-size: 16px;
+        width: 250px;
+        cursor: move;
+        user-select: none;
+        overflow-y: auto;
+        max-height: 80vh;
+      }
+      .menu * {
+        color: black !important;
+      }
+      .menu input,
+      .menu button {
+        width: 100%;
+        margin-top: 5px;
+        margin-bottom: 10px;
+      }
+      .menu-header {
+        font-weight: bold;
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #e67300;
+        color: white !important;
+        border-radius: 10px 10px 0 0;
+        text-align: center;
+        cursor: move;
+      }
+      .menu label {
+        display: block;
+        margin-top: 10px;
+      }
+      body {
+        pointer-events: auto; /* Allow interactions with the website content */
+      }
+    `;
+    document.head.appendChild(style);
 
-    .menu * {
-      color: black !important;
-      pointer-events: auto; /* Ensure the elements inside the menu are interactive */
-    }
+    const menu = document.createElement('div');
+    menu.className = 'menu';
+    menu.innerHTML = `
+      <div class="menu-header">⚙️ Settings</div>
+      <label>🎨 Background Color:<input type="color" id="backgroundColor" value="#ffffff"></label>
+      <label>🖼️ Background Image URL:<input type="text" id="backgroundImage" placeholder="Enter image URL"></label>
+      <label>🔠 Font Size:<input type="range" id="fontSize" min="10" max="50" value="16"></label>
+      <label>📝 Text Color:<input type="color" id="textColor" value="#000000"></label>
+      <button id="toggleModeBtn">🌓 Toggle Dark/Light Mode</button>
+      <button id="resetBtn">🔄 Reset</button>
+    `;
+    document.body.appendChild(menu);
 
-    .menu input,
-    .menu button,
-    .menu select {
-      width: 100%;
-      margin-top: 5px;
-      margin-bottom: 10px;
-    }
+    const get = id => document.getElementById(id);
+    const updateTextStyle = (prop, value) => {
+      document.querySelectorAll('h1,h2,h3,h4,h5,h6,p,span,li,a,div').forEach(el => {
+        if (!el.closest('.menu')) el.style[prop] = value;
+      });
+    };
 
-    .menu-header {
-      font-weight: bold;
-      margin-bottom: 10px;
-      padding: 10px;
-      background-color: #e67300;
-      color: white !important;
-      border-radius: 10px 10px 0 0;
-      text-align: center;
-      cursor: move;
-    }
+    const menuHeader = menu.querySelector('.menu-header');
+    let dragging = false, offsetX, offsetY;
 
-    .menu label {
-      display: block;
-      margin-top: 10px;
-    }
-
-    /* Scrollbar Styles */
-    ::-webkit-scrollbar {
-      width: 16px;
-      height: 16px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background-color: #888;
-      border-radius: 10px;
-      transition: background-color 0.3s ease;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background-color: #555;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #f1f1f1;
-      border-radius: 10px;
-    }
-
-    ::-webkit-scrollbar-corner {
-      background: transparent;
-    }
-  `;
-  document.head.appendChild(style);
-
-  const menu = document.createElement('div');
-  menu.className = 'menu';
-  menu.innerHTML = `
-    <div class="menu-header">⚙️ Settings</div>
-    <label>🎨 Background Color:<input type="color" id="backgroundColor" value="#ffffff"></label>
-    <label>🖼️ Background Image URL:<input type="text" id="backgroundImage" placeholder="Enter image URL"></label>
-    <label>🔠 Font Size:<input type="range" id="fontSize" min="10" max="50" value="16"></label>
-    <label>📝 Text Color:<input type="color" id="textColor" value="#000000"></label>
-    <label>🔤 Text Alignment:
-      <select id="textAlignment">
-        <option value="left">Left</option>
-        <option value="center">Center</option>
-        <option value="right">Right</option>
-      </select>
-    </label>
-    <label>🖊️ Border Radius:<input type="range" id="borderRadius" min="0" max="50" value="10"></label>
-    <label>🛑 Hide Images:<input type="checkbox" id="hideImages"></label>
-    <label>⚙️ Toggle Borders:<input type="checkbox" id="toggleBorders"></label>
-    <label>🌍 Toggle Fullscreen Background:<input type="checkbox" id="toggleFullscreen"></label>
-    <label>💡 Shadow Effect:<input type="checkbox" id="shadowEffect"></label>
-    <label>🖋️ Text Stroke:<input type="range" id="textStroke" min="0" max="10" value="0"></label>
-    <label>🌈 Gradient Background:
-      <input type="color" id="gradientStartColor" value="#ff7f7f">
-      to
-      <input type="color" id="gradientEndColor" value="#ffcc00">
-    </label>
-    <label>🔳 Button Color:<input type="color" id="buttonColor" value="#ff5722"></label>
-    <label>🔲 Link Color:<input type="color" id="linkColor" value="#0000ee"></label>
-    <label>🔠 Line Height:<input type="range" id="lineHeight" min="1" max="3" step="0.1" value="1.5"></label>
-    <button id="toggleModeBtn">🌓 Toggle Dark/Light Mode</button>
-    <button id="resetBtn">🔄 Reset</button>
-  `;
-  document.body.appendChild(menu);
-
-  const get = id => document.getElementById(id);
-  const notMenu = el => !el.closest('.menu');
-  const updateTextStyle = (prop, value) => {
-    document.querySelectorAll('h1,h2,h3,h4,h5,h6,p,span,li,a,div').forEach(el => {
-      if (notMenu(el)) el.style[prop] = value;
+    menuHeader.addEventListener('mousedown', e => {
+      dragging = true;
+      offsetX = e.clientX - menu.offsetLeft;
+      offsetY = e.clientY - menu.offsetTop;
     });
-  };
-
-  const applyFullScreenBackground = () => {
-    const isFullscreen = get('toggleFullscreen').checked;
-    if (isFullscreen) {
-      document.body.style.backgroundSize = 'cover';
-      document.body.style.backgroundAttachment = 'fixed';
-    } else {
-      document.body.style.backgroundSize = 'auto';
-      document.body.style.backgroundAttachment = 'scroll';
-    }
-  };
-
-  const applyBorders = () => {
-    const borderToggle = get('toggleBorders').checked;
-    document.querySelectorAll('*').forEach(el => {
-      if (notMenu(el)) {
-        el.style.border = borderToggle ? '1px solid black' : 'none';
+    document.addEventListener('mousemove', e => {
+      if (dragging) {
+        menu.style.left = `${e.clientX - offsetX}px`;
+        menu.style.top = `${e.clientY - offsetY}px`;
       }
     });
-  };
+    document.addEventListener('mouseup', () => dragging = false);
 
-  const applyShadowEffect = () => {
-    const shadowToggle = get('shadowEffect').checked;
-    document.querySelectorAll('*').forEach(el => {
-      if (notMenu(el)) {
-        el.style.boxShadow = shadowToggle ? '0 0 10px rgba(0, 0, 0, 0.5)' : 'none';
+    get('backgroundColor').addEventListener('input', e => {
+      document.body.style.backgroundColor = e.target.value;
+      document.body.style.backgroundImage = 'none';
+    });
+
+    get('backgroundImage').addEventListener('input', e => {
+      const url = e.target.value;
+      document.body.style.backgroundImage = url ? `url(${url})` : 'none';
+    });
+
+    get('fontSize').addEventListener('input', e => {
+      updateTextStyle('fontSize', e.target.value + 'px');
+    });
+
+    get('textColor').addEventListener('input', e => {
+      updateTextStyle('color', e.target.value);
+    });
+
+    get('toggleModeBtn').addEventListener('click', () => {
+      if (document.body.style.backgroundColor === 'rgb(0, 0, 0)') {
+        document.body.style.backgroundColor = '#ffffff';
+        document.body.style.color = '#000000';
+        document.body.style.backgroundImage = 'none';
+      } else {
+        document.body.style.backgroundColor = '#000000';
+        document.body.style.color = '#ffffff';
+        document.body.style.backgroundImage = 'none';
       }
     });
-  };
 
-  const applyGradientBackground = () => {
-    const startColor = get('gradientStartColor').value;
-    const endColor = get('gradientEndColor').value;
-    document.body.style.backgroundImage = `linear-gradient(to right, ${startColor}, ${endColor})`;
-  };
-
-  const menuHeader = menu.querySelector('.menu-header');
-  let dragging = false, offsetX, offsetY;
-
-  menuHeader.addEventListener('mousedown', e => {
-    dragging = true;
-    offsetX = e.clientX - menu.offsetLeft;
-    offsetY = e.clientY - menu.offsetTop;
-  });
-  document.addEventListener('mousemove', e => {
-    if (dragging) {
-      menu.style.left = `${e.clientX - offsetX}px`;
-      menu.style.top = `${e.clientY - offsetY}px`;
-    }
-  });
-  document.addEventListener('mouseup', () => dragging = false);
-
-  get('backgroundColor').addEventListener('input', e => {
-    document.body.style.backgroundColor = e.target.value;
-    document.body.style.backgroundImage = 'none';
-  });
-
-  get('backgroundImage').addEventListener('input', e => {
-    const url = e.target.value;
-    document.body.style.backgroundImage = url ? `url(${url})` : 'none';
-  });
-
-  get('fontSize').addEventListener('input', e => {
-    updateTextStyle('fontSize', e.target.value + 'px');
-  });
-
-  get('textColor').addEventListener('input', e => {
-    updateTextStyle('color', e.target.value);
-  });
-
-  get('textAlignment').addEventListener('change', e => {
-    updateTextStyle('textAlign', e.target.value);
-  });
-
-  get('borderRadius').addEventListener('input', e => {
-    updateTextStyle('borderRadius', e.target.value + 'px');
-  });
-
-  get('hideImages').addEventListener('change', e => {
-    document.querySelectorAll('img').forEach(img => {
-      if (notMenu(img)) img.style.display = e.target.checked ? 'none' : 'inline';
-    });
-  });
-
-  get('toggleBorders').addEventListener('change', applyBorders);
-  get('toggleFullscreen').addEventListener('change', applyFullScreenBackground);
-  get('shadowEffect').addEventListener('change', applyShadowEffect);
-  get('gradientStartColor').addEventListener('input', applyGradientBackground);
-  get('gradientEndColor').addEventListener('input', applyGradientBackground);
-
-  get('textStroke').addEventListener('input', e => {
-    updateTextStyle('textStroke', `${e.target.value}px`);
-  });
-
-  get('buttonColor').addEventListener('input', e => {
-    document.querySelectorAll('button').forEach(btn => {
-      btn.style.backgroundColor = e.target.value;
-    });
-  });
-
-  get('linkColor').addEventListener('input', e => {
-    document.querySelectorAll('a').forEach(link => {
-      link.style.color = e.target.value;
-      link.style.textDecoration = 'underline';
-    });
-  });
-
-  get('lineHeight').addEventListener('input', e => {
-    updateTextStyle('lineHeight', e.target.value);
-  });
-
-  get('toggleModeBtn').addEventListener('click', () => {
-    if (document.body.style.backgroundColor === 'rgb(0, 0, 0)') {
+    get('resetBtn').addEventListener('click', () => {
       document.body.style.backgroundColor = '#ffffff';
       document.body.style.color = '#000000';
       document.body.style.backgroundImage = 'none';
-    } else {
-      document.body.style.backgroundColor = '#000000';
-      document.body.style.color = '#ffffff';
-      document.body.style.backgroundImage = 'none';
-    }
-  });
+      updateTextStyle('color', '#000000');
+      updateTextStyle('fontSize', '16px');
+    });
 
-  get('resetBtn').addEventListener('click', () => {
-    document.body.style.backgroundColor = '#ffffff';
-    document.body.style.color = '#000000';
-    document.body.style.backgroundImage = 'none';
-    document.body.style.opacity = '1';
-    document.body.style.backgroundSize = 'auto';
-    document.body.style.backgroundAttachment = 'scroll';
-    document.body.style.backgroundImage = 'linear-gradient(to right, #ff7f7f, #ffcc00)';
-    updateTextStyle('color', '#000000');
-    updateTextStyle('fontSize', '16px');
-    updateTextStyle('textAlign', 'left');
-    updateTextStyle('borderRadius', '0px');
-    updateTextStyle('lineHeight', '1.5');
-    applyBorders();
-    applyShadowEffect();
-    applyFullScreenBackground();
-    applyGradientBackground();
-  });
+    console.log('Custom menu activated!');
+  } else {
+    console.log('This script only runs when entered in the browser console!');
+  }
 })();
-"</p>
+</p>
+    
     <script src="index.js"></script>
 </body>
 </html>
