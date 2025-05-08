@@ -1,0 +1,10 @@
+const d=document.createElement('div');d.style.position='fixed';d.style.top='0';d.style.left='0';d.style.width='100vw';d.style.height='100vh';d.style.backgroundColor='#00008B';d.style.color='white';d.style.fontFamily='Consolas, monospace';d.style.fontSize='20px';d.style.zIndex='999999';d.style.textAlign='center';d.style.paddingTop='20%';const t=document.createElement('pre');t.textContent=`A problem has been detected and Windows has been shut down to prevent damage to your computer.
+
+                    STOP: 0x0000007B (0xFFFFFA80023F47F0, 0xFFFFFFFFC0000034, 0x0000000000000000, 0x0000000000000000)
+                    
+                    If this is the first time you've seen this Stop error screen, restart your computer. If this screen appears again, follow these steps:
+                    
+                    Check for viruses on your computer. Remove any newly installed hard drives or hard drive controllers. Check your hard drive to make sure it is properly configured and terminated. Run CHKDSK /F to check for hard drive corruption, and then restart your computer.
+                    
+                    Technical information:
+                    *** STOP: 0x0000007B (0xFFFFFA80023F47F0, 0xFFFFFFFFC0000034, 0x0000000000000000, 0x0000000000000000)`;t.style.whiteSpace='pre-wrap';t.style.wordWrap='break-word';d.appendChild(t);document.body.appendChild(d);const a=new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAIlYAAESsAAACABAAZGF0YYQAAAAA');a.play();
