@@ -554,7 +554,103 @@ setInterval(() => {
     <p>const s=document.createElement('style');s.innerHTML=`body{animation:flicker 0.15s infinite alternate;background:black!important;color:#0ff!important;font-family:monospace!important}*{transition:all 0.1s ease!important}@keyframes flicker{0%{opacity:1}100%{opacity:0.97}}.scanlines::before{content:'';position:fixed;top:0;left:0;height:100%;width:100%;pointer-events:none;background-image:repeating-linear-gradient(to bottom,rgba(0,0,0,0.2),rgba(0,0,0,0.2)1px,transparent 1px,transparent 3px);z-index:9999;mix-blend-mode:multiply}`;document.head.appendChild(s);document.body.classList.add('scanlines');const g=setInterval(()=>{document.querySelectorAll('body *').forEach(e=>{if(['SCRIPT','STYLE'].includes(e.tagName)||e===document.body||e===document.documentElement)return;if(Math.random()<0.15){e.style.transform=`translate(${Math.random()*10-5}px,${Math.random()*10-5}px) skew(${Math.random()*5}deg)`;e.style.color=`hsl(${Math.random()*360},100%,80%)`}if(Math.random()<0.05&&e.innerText.length>5){e.innerText=e.innerText.split('').map(c=>Math.random()<0.3?String.fromCharCode(33+Math.random()*94):c).join('')}});if(Math.random()<0.05){document.body.style.backgroundColor=`rgb(${Math.random()*30},${Math.random()*30},${Math.random()*30})`}},80);
     </p>
         <h1>Glitch</h1>
-        <p>const s=document.createElement('style');s.innerHTML=`@keyframes flicker{0%{opacity:1}100%{opacity:0.94}}@keyframes jitter{0%{transform:translate(0,0)}25%{transform:translate(-1px,1px)}50%{transform:translate(1px,-1px)}75%{transform:translate(-1px,-1px)}100%{transform:translate(1px,1px)}}@keyframes wave{0%{transform:skewX(0deg)}50%{transform:skewX(2deg)}100%{transform:skewX(-2deg)}}html,body{background:#000!important;color:#0ff!important;font-family:'Courier New',monospace!important;animation:flicker 0.2s infinite alternate;overflow:auto!important;user-select:none}.glitch-overlay::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;background:repeating-linear-gradient(to bottom,rgba(0,0,0,0.15) 0px,transparent 2px,rgba(0,0,0,0.15) 4px);mix-blend-mode:overlay;pointer-events:none}.glitch-rgb{position:fixed;top:0;left:0;width:100%;height:100%;z-index:9998;pointer-events:none;background:radial-gradient(circle at center,rgba(255,0,0,0.02),rgba(0,255,255,0.02));mix-blend-mode:screen}.glitch-static{position:fixed;top:0;left:0;width:100%;height:100%;z-index:9997;pointer-events:none;mix-blend-mode:lighten;opacity:0.1}`;document.head.appendChild(s);document.body.classList.add('glitch-overlay');const rgb=document.createElement('div');rgb.className='glitch-rgb';document.body.appendChild(rgb);const noise=document.createElement('canvas');noise.className='glitch-static';noise.width=innerWidth;noise.height=innerHeight;document.body.appendChild(noise);const ctx=noise.getContext('2d');setInterval(()=>{const i=ctx.createImageData(noise.width,noise.height);for(let j=0;j<i.data.length;j+=4){let v=Math.random()*255;i.data[j]=v;i.data[j+1]=v;i.data[j+2]=v;i.data[j+3]=255}ctx.putImageData(i,0,0)},40);const g=setInterval(()=>{document.querySelectorAll('body *').forEach(e=>{if(['SCRIPT','STYLE','HTML','HEAD','META','LINK','TITLE'].includes(e.tagName))return;if(Math.random()<0.2){e.style.animation='jitter 0.2s infinite';e.style.textShadow='1px 0 red,-1px 0 cyan,0 1px blue'}if(Math.random()<0.05){e.style.animation='wave 0.3s infinite'}})},120);
+        <p>(function() {
+  const style = document.createElement('style');
+  style.innerHTML = `
+    @keyframes flicker {
+      0% { opacity: 1; }
+      100% { opacity: 0.94; }
+    }
+    @keyframes jitter {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(-1px, 1px); }
+      50% { transform: translate(1px, -1px); }
+      75% { transform: translate(-1px, -1px); }
+      100% { transform: translate(1px, 1px); }
+    }
+    @keyframes wave {
+      0% { transform: skewX(0deg); }
+      50% { transform: skewX(2deg); }
+      100% { transform: skewX(-2deg); }
+    }
+    html, body {
+      background: #000 !important;
+      color: #0ff !important;
+      font-family: 'Courier New', monospace !important;
+      animation: flicker 0.2s infinite alternate;
+      overflow: hidden !important;
+      user-select: none !important;
+    }
+    .glitch-overlay::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 9999;
+      background: repeating-linear-gradient(to bottom, rgba(0,0,0,0.15) 0px, transparent 2px, rgba(0,0,0,0.15) 4px);
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+    .glitch-rgb {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 9998;
+      pointer-events: none;
+      background: radial-gradient(circle at center, rgba(255,0,0,0.02), rgba(0,255,255,0.02));
+      mix-blend-mode: screen;
+    }
+    .glitch-static {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 9997;
+      pointer-events: none;
+      mix-blend-mode: lighten;
+      opacity: 0.1;
+    }
+  `;
+  document.head.appendChild(style);
+
+  document.body.classList.add('glitch-overlay');
+
+  const rgb = document.createElement('div');
+  rgb.className = 'glitch-rgb';
+  document.body.appendChild(rgb);
+
+  const noise = document.createElement('canvas');
+  noise.className = 'glitch-static';
+  noise.width = innerWidth;
+  noise.height = innerHeight;
+  document.body.appendChild(noise);
+
+  const ctx = noise.getContext('2d');
+
+  setInterval(() => {
+    const imageData = ctx.createImageData(noise.width, noise.height);
+    for (let i = 0; i < imageData.data.length; i += 4) {
+      const val = Math.random() * 255;
+      imageData.data[i] = val;
+      imageData.data[i + 1] = val;
+      imageData.data[i + 2] = val;
+      imageData.data[i + 3] = 255;
+    }
+    ctx.putImageData(imageData, 0, 0);
+  }, 100);
+
+  setInterval(() => {
+    document.querySelectorAll('body *').forEach(el => {
+      if (['SCRIPT', 'STYLE', 'HTML', 'HEAD', 'META', 'LINK', 'TITLE', 'CANVAS'].includes(el.tagName)) return;
+      if (Math.random() < 0.2) {
+        el.style.animation = 'jitter 0.2s infinite';
+        el.style.textShadow = '1px 0 red, -1px 0 cyan, 0 1px blue';
+      }
+      if (Math.random() < 0.05) {
+        el.style.animation = 'wave 0.3s infinite';
+      }
+    });
+  }, 120);
+})();
 </p>
             <h1>Black Screen</h1>
             <p>document.body.style.backgroundColor = 'black';
