@@ -25,17 +25,51 @@
     const commandInput = document.getElementById('commandInput');
     const output = document.getElementById('output');
 
+    const commands = {
+      hack: 'Hacking... You are now in control.',
+      status: 'System Status: All systems operational.',
+      breach: 'Breaching data stores... Accessing secure files...',
+      scan: 'Scanning network... Vulnerabilities detected: 3',
+      exploit: 'Exploit initiated... Access granted to Target-01.',
+      shutdown: 'Initiating system shutdown... Goodbye.',
+      clear: '',
+      help: `Available commands:
+        - hack: Hack into the system.
+        - status: Check system status.
+        - breach: Breach the data stores.
+        - scan: Scan the network for vulnerabilities.
+        - exploit: Exploit vulnerabilities in the system.
+        - shutdown: Shutdown the system.
+        - clear: Clear the console output.
+        - credits: Shows Who Made It
+        - help: Display this help message.`,
+      secret: 'SECRET CODE ACCEPTED: Accessing hidden file systems...',
+      reset: 'Resetting all configurations...',
+      ping: 'Pinging... Response time: 20ms',
+      info: 'System Info: CPU: 80%, RAM: 4GB, Network: Online.',
+      test: 'Test complete. No errors found.',
+      credits: 'This Entire Thing Was Made By Noah'
+    };
+
     executeBtn.addEventListener('click', () => {
       const command = commandInput.value.trim();
       if (command) {
-        output.textContent = `Executing: ${command}`;
-        // Example commands
-        if (command === 'hack') {
-          output.textContent = 'Hacking... You are now in control.';
-        } else if (command === 'status') {
-          output.textContent = 'System Status: All systems operational.';
+        if (commands[command]) {
+          output.textContent = commands[command];
         } else {
           output.textContent = `Unknown command: ${command}`;
+        }
+      }
+    });
+
+    // Secret shutdown behavior after command input
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const command = commandInput.value.trim().toLowerCase();
+        if (command === 'shutdown') {
+          setTimeout(() => {
+            document.body.innerHTML = '<h1 style="text-align:center;color:red;">System Shutdown...</h1>';
+          }, 3000);
         }
       }
     });
