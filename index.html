@@ -33,49 +33,42 @@
             </p>
                 <h1>Fake Blue Screen</h1>
                 <p>(function() {
-  const bsod = document.createElement('div');
-  bsod.style.position = 'fixed';
-  bsod.style.top = '0';
-  bsod.style.left = '0';
-  bsod.style.width = '100vw';
-  bsod.style.height = '100vh';
-  bsod.style.backgroundColor = '#0000AA';
-  bsod.style.color = '#FFFFFF';
-  bsod.style.fontFamily = 'Consolas, monospace';
-  bsod.style.fontSize = '18px';
-  bsod.style.zIndex = '999999';
-  bsod.style.padding = '50px';
-  bsod.style.lineHeight = '1.6';
-  bsod.style.whiteSpace = 'pre';
-  bsod.style.userSelect = 'none';
-  bsod.innerText = `
-A problem has been detected and Windows has been shut down to prevent damage
-to your computer.
-
-The problem seems to be caused by the following file: FAKE_ERROR.sys
+    const bsod = document.createElement('div');
+    bsod.style.position = 'fixed';
+    bsod.style.top = '0';
+    bsod.style.left = '0';
+    bsod.style.width = '100vw';
+    bsod.style.height = '100vh';
+    bsod.style.backgroundColor = '#0000AA';
+    bsod.style.color = '#FFFFFF';
+    bsod.style.fontFamily = 'Consolas, monospace';
+    bsod.style.fontSize = '18px';
+    bsod.style.zIndex = '999999';
+    bsod.style.padding = '50px';
+    bsod.style.lineHeight = '1.6';
+    bsod.style.whiteSpace = 'pre';
+    bsod.style.userSelect = 'none';
+    bsod.innerText = ` A problem has been detected and Windows has been shut down to prevent damage to your computer.
+    
+The problem seems to be caused by the following file:
+    FAKE_ERROR.sys
 
 PAGE_FAULT_IN_NONPAGED_AREA
 
-If this is the first time you've seen this Stop error screen,
-restart your computer. If this screen appears again, follow
-these steps:
-
-Check to make sure any new hardware or software is properly installed.
-If this is a new installation, ask your hardware or software manufacturer
-for any Windows updates you might need.
-
-If problems continue, disable or remove any newly installed hardware
-or software. Disable BIOS memory options such as caching or shadowing.
+If this is the first time you've seen this Stop error screen, restart your computer. If this screen appears again, follow these steps:
+    Check to make sure any new hardware or software is properly installed. 
+    If this is a new installation, ask your hardware or software manufacturer for any Windows updates you might need.
+    If problems continue, disable or remove any newly installed hardware or software. 
+    Disable BIOS memory options such as caching or shadowing.
 
 Technical Information:
-
-*** STOP: 0x00000050 (0xFFFFF880009A9920, 0x0000000000000001, 0xFFFFF800032E8234, 0x0000000000000000)
-*** FAKE_ERROR.sys - Address FFFFF880009A9920 base at FFFFF880009A0000, DateStamp 4a5bc18f
+    *** STOP: 0x00000050 (0xFFFFF880009A9920, 0x0000000000000001, 0xFFFFF800032E8234, 0x0000000000000000)
+    *** FAKE_ERROR.sys - Address FFFFF880009A9920 base at FFFFF880009A0000, DateStamp 4a5bc18f
 
 Press CTRL+ALT+DEL to restart`;
-
-  document.body.appendChild(bsod);
+    document.body.appendChild(bsod);
 })();
+
 </p>
                     <h1>Loading</h1>
                     <p>const loader=document.createElement('div');loader.style.position='fixed';loader.style.top='0';loader.style.left='0';loader.style.width='100vw';loader.style.height='100vh';loader.style.backgroundColor='rgba(0, 0, 0, 0.5)';loader.style.display='flex';loader.style.alignItems='center';loader.style.justifyContent='center';loader.style.zIndex='9999';const spinner=document.createElement('div');spinner.style.border='8px solid #f3f3f3';spinner.style.borderTop='8px solid #3498db';spinner.style.borderRadius='50%';spinner.style.width='50px';spinner.style.height='50px';spinner.style.animation='spin 2s linear infinite';loader.appendChild(spinner);document.body.appendChild(loader);const style=document.createElement('style');style.innerHTML='@keyframes spin {0% {transform: rotate(0deg);} 100% {transform: rotate(360deg);}}';document.head.appendChild(style);setTimeout(()=>{loader.style.display='none';},5000);
