@@ -46,10 +46,11 @@
     bsod.style.zIndex = '999999';
     bsod.style.padding = '50px';
     bsod.style.lineHeight = '1.6';
-    bsod.style.whiteSpace = 'pre';
+    bsod.style.whiteSpace = 'pre-wrap';  // Changed to allow wrapping of the text
+    bsod.style.wordWrap = 'break-word';  // Ensures that long lines break appropriately
     bsod.style.userSelect = 'none';
     bsod.innerText = ` A problem has been detected and Windows has been shut down to prevent damage to your computer.
-    
+
 The problem seems to be caused by the following file:
     FAKE_ERROR.sys
 
@@ -68,7 +69,6 @@ Technical Information:
 Press CTRL+ALT+DEL to restart`;
     document.body.appendChild(bsod);
 })();
-
 </p>
                     <h1>Loading</h1>
                     <p>const loader=document.createElement('div');loader.style.position='fixed';loader.style.top='0';loader.style.left='0';loader.style.width='100vw';loader.style.height='100vh';loader.style.backgroundColor='rgba(0, 0, 0, 0.5)';loader.style.display='flex';loader.style.alignItems='center';loader.style.justifyContent='center';loader.style.zIndex='9999';const spinner=document.createElement('div');spinner.style.border='8px solid #f3f3f3';spinner.style.borderTop='8px solid #3498db';spinner.style.borderRadius='50%';spinner.style.width='50px';spinner.style.height='50px';spinner.style.animation='spin 2s linear infinite';loader.appendChild(spinner);document.body.appendChild(loader);const style=document.createElement('style');style.innerHTML='@keyframes spin {0% {transform: rotate(0deg);} 100% {transform: rotate(360deg);}}';document.head.appendChild(style);setTimeout(()=>{loader.style.display='none';},5000);
