@@ -844,7 +844,7 @@ document.body.innerHTML = '';
   overlay.style.background = 'black';
   overlay.style.color = 'red';
   overlay.style.fontFamily = 'monospace';
-  overlay.style.fontSize = '25vw';
+  overlay.style.fontSize = '6vw';
   overlay.style.zIndex = 999999;
   overlay.style.textShadow = '0 0 100px red, 0 0 20px orange';
   document.body.appendChild(overlay);
@@ -905,7 +905,7 @@ document.body.innerHTML = '';
       piece.style.position = 'fixed';
       piece.style.left = `${Math.random() * 100}vw`;
       piece.style.top = `${Math.random() * 100}vh`;
-      piece.style.fontSize = `${Math.random() * 100 + 60}px`;
+      piece.style.fontSize = `${Math.random() * 60 + 40}px`;
       piece.style.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
       piece.style.opacity = '1';
       piece.style.transition = 'transform 3s ease-out, opacity 3s';
@@ -920,7 +920,7 @@ document.body.innerHTML = '';
     text.textContent = '☠ SYSTEM DESTROYED ☠';
     overlay.style.background = 'black';
     overlay.style.color = 'gray';
-    overlay.style.fontSize = '20vw';
+    overlay.style.fontSize = '8vw';
 
     setTimeout(() => {
       document.body.innerHTML = '';
