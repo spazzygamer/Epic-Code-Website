@@ -826,13 +826,11 @@ document.body.innerHTML = '';
 </p>
     <h1>Self Destruct</h1>
     <p>(function(){
-  // Clear the page and set the background
   document.body.innerHTML = '';
   document.body.style.margin = '0';
   document.body.style.overflow = 'hidden';
   document.body.style.background = 'black';
 
-  // Main overlay
   const overlay = document.createElement('div');
   overlay.style.position = 'fixed';
   overlay.style.top = '0';
@@ -846,12 +844,11 @@ document.body.innerHTML = '';
   overlay.style.background = 'black';
   overlay.style.color = 'red';
   overlay.style.fontFamily = 'monospace';
-  overlay.style.fontSize = '25vw'; // MASSIVE
+  overlay.style.fontSize = '25vw';
   overlay.style.zIndex = 999999;
   overlay.style.textShadow = '0 0 100px red, 0 0 20px orange';
   document.body.appendChild(overlay);
 
-  // Flashing warning
   const flash = document.createElement('div');
   flash.style.position = 'absolute';
   flash.style.top = '0';
@@ -864,18 +861,14 @@ document.body.innerHTML = '';
   flash.style.mixBlendMode = 'screen';
   overlay.appendChild(flash);
 
-  // Countdown text
   const text = document.createElement('div');
   overlay.appendChild(text);
 
   let count = 10;
   const interval = setInterval(() => {
     text.textContent = `⚠ SELF-DESTRUCT IN ${count--} ⚠`;
-    
-    // Flash red with chaotic flickers
     flash.style.transition = 'opacity 0.2s';
     flash.style.opacity = Math.random() < 0.5 ? '0.8' : '0';
-    
     setTimeout(() => flash.style.opacity = '0', 100);
 
     if (count < 0) {
@@ -890,7 +883,6 @@ document.body.innerHTML = '';
     overlay.style.background = 'white';
     overlay.style.transition = 'background 0.7s, color 0.7s';
 
-    // Super intense screen shake
     let shake = 100;
     const shakeInterval = setInterval(() => {
       document.body.style.transform = `translate(${Math.random() * shake - shake / 2}px, ${Math.random() * shake - shake / 2}px)`;
@@ -901,22 +893,20 @@ document.body.innerHTML = '';
         collapseElements();
       }
     }, 40);
-    
-    // Random explosion sounds
+
     const audio = new Audio('https://www.soundjay.com/button/beep-07.wav');
     audio.play();
   }
 
   function collapseElements() {
-    // Falling debris with random colors
     for (let i = 0; i < 300; i++) {
       const piece = document.createElement('div');
       piece.textContent = '█';
       piece.style.position = 'fixed';
       piece.style.left = `${Math.random() * 100}vw`;
       piece.style.top = `${Math.random() * 100}vh`;
-      piece.style.fontSize = `${Math.random() * 100 + 60}px`; // ENORMOUS debris
-      piece.style.color = `hsl(${Math.random() * 360}, 100%, 50%)`; // Random colors
+      piece.style.fontSize = `${Math.random() * 100 + 60}px`;
+      piece.style.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
       piece.style.opacity = '1';
       piece.style.transition = 'transform 3s ease-out, opacity 3s';
       overlay.appendChild(piece);
@@ -927,16 +917,14 @@ document.body.innerHTML = '';
       }, 100);
     }
 
-    // Ending message with larger font
     text.textContent = '☠ SYSTEM DESTROYED ☠';
     overlay.style.background = 'black';
     overlay.style.color = 'gray';
     overlay.style.fontSize = '20vw';
 
-    // Adding a fake reboot effect by clearing the page
     setTimeout(() => {
-      document.body.innerHTML = '';  // Clear the page for a fake restart
-      setTimeout(() => location.reload(), 1000); // Restart after 1 second
+      document.body.innerHTML = '';
+      setTimeout(() => location.reload(), 1000);
     }, 5000);
   }
 })();
