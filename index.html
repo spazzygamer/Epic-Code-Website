@@ -787,7 +787,160 @@ document.body.innerHTML = '';
   });
 })();
 </p>
-    <h1></h1>
+    <h1>Static</h1>
+    <p>(function(){
+  const canvas = document.createElement('canvas');
+  canvas.style.position = 'fixed';
+  canvas.style.top = '0';
+  canvas.style.left = '0';
+  canvas.style.width = '100vw';
+  canvas.style.height = '100vh';
+  canvas.style.zIndex = 999999;
+  canvas.style.pointerEvents = 'none';
+  document.body.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function drawStatic() {
+    const imageData = ctx.createImageData(canvas.width, canvas.height);
+    for (let i = 0; i < imageData.data.length; i += 4) {
+      const value = Math.random() * 255;
+      imageData.data[i] = value;
+      imageData.data[i + 1] = value;
+      imageData.data[i + 2] = value;
+      imageData.data[i + 3] = 255;
+    }
+    ctx.putImageData(imageData, 0, 0);
+    requestAnimationFrame(drawStatic);
+  }
+
+  drawStatic();
+})();
+</p>
+    <h1>Self Destruct</h1>
+    <p>(function(){
+  // Clear the page and set the background
+  document.body.innerHTML = '';
+  document.body.style.margin = '0';
+  document.body.style.overflow = 'hidden';
+  document.body.style.background = 'black';
+
+  // Main overlay
+  const overlay = document.createElement('div');
+  overlay.style.position = 'fixed';
+  overlay.style.top = '0';
+  overlay.style.left = '0';
+  overlay.style.width = '100vw';
+  overlay.style.height = '100vh';
+  overlay.style.display = 'flex';
+  overlay.style.flexDirection = 'column';
+  overlay.style.justifyContent = 'center';
+  overlay.style.alignItems = 'center';
+  overlay.style.background = 'black';
+  overlay.style.color = 'red';
+  overlay.style.fontFamily = 'monospace';
+  overlay.style.fontSize = '25vw'; // MASSIVE
+  overlay.style.zIndex = 999999;
+  overlay.style.textShadow = '0 0 100px red, 0 0 20px orange';
+  document.body.appendChild(overlay);
+
+  // Flashing warning
+  const flash = document.createElement('div');
+  flash.style.position = 'absolute';
+  flash.style.top = '0';
+  flash.style.left = '0';
+  flash.style.width = '100%';
+  flash.style.height = '100%';
+  flash.style.background = 'red';
+  flash.style.opacity = '0';
+  flash.style.zIndex = '-1';
+  flash.style.mixBlendMode = 'screen';
+  overlay.appendChild(flash);
+
+  // Countdown text
+  const text = document.createElement('div');
+  overlay.appendChild(text);
+
+  let count = 10;
+  const interval = setInterval(() => {
+    text.textContent = `⚠ SELF-DESTRUCT IN ${count--} ⚠`;
+    
+    // Flash red with chaotic flickers
+    flash.style.transition = 'opacity 0.2s';
+    flash.style.opacity = Math.random() < 0.5 ? '0.8' : '0';
+    
+    setTimeout(() => flash.style.opacity = '0', 100);
+
+    if (count < 0) {
+      clearInterval(interval);
+      explode();
+    }
+  }, 500);
+
+  function explode() {
+    text.textContent = '💥💥💥 B O O M 💥💥💥';
+    overlay.style.color = 'white';
+    overlay.style.background = 'white';
+    overlay.style.transition = 'background 0.7s, color 0.7s';
+
+    // Super intense screen shake
+    let shake = 100;
+    const shakeInterval = setInterval(() => {
+      document.body.style.transform = `translate(${Math.random() * shake - shake / 2}px, ${Math.random() * shake - shake / 2}px)`;
+      shake *= 0.9;
+      if (shake < 1) {
+        clearInterval(shakeInterval);
+        document.body.style.transform = '';
+        collapseElements();
+      }
+    }, 40);
+    
+    // Random explosion sounds
+    const audio = new Audio('https://www.soundjay.com/button/beep-07.wav');
+    audio.play();
+  }
+
+  function collapseElements() {
+    // Falling debris with random colors
+    for (let i = 0; i < 300; i++) {
+      const piece = document.createElement('div');
+      piece.textContent = '█';
+      piece.style.position = 'fixed';
+      piece.style.left = `${Math.random() * 100}vw`;
+      piece.style.top = `${Math.random() * 100}vh`;
+      piece.style.fontSize = `${Math.random() * 100 + 60}px`; // ENORMOUS debris
+      piece.style.color = `hsl(${Math.random() * 360}, 100%, 50%)`; // Random colors
+      piece.style.opacity = '1';
+      piece.style.transition = 'transform 3s ease-out, opacity 3s';
+      overlay.appendChild(piece);
+
+      setTimeout(() => {
+        piece.style.transform = `translateY(${window.innerHeight}px) rotate(${Math.random() * 1800}deg)`;
+        piece.style.opacity = '0';
+      }, 100);
+    }
+
+    // Ending message with larger font
+    text.textContent = '☠ SYSTEM DESTROYED ☠';
+    overlay.style.background = 'black';
+    overlay.style.color = 'gray';
+    overlay.style.fontSize = '20vw';
+
+    // Adding a fake reboot effect by clearing the page
+    setTimeout(() => {
+      document.body.innerHTML = '';  // Clear the page for a fake restart
+      setTimeout(() => location.reload(), 1000); // Restart after 1 second
+    }, 5000);
+  }
+})();
+</p>
     <script src="index.js"></script>
 </body>
 </html>
