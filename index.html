@@ -929,6 +929,129 @@ document.body.innerHTML = '';
   }
 })();
 </p>
+    <h1>Cream</h1>
+    <p>const shootMoreWhiteLiquidUpward = () => {
+  const count = 500;
+  for (let i = 0; i < count; i++) {
+    const blob = document.createElement('div');
+    const size = Math.random() * 25 + 10;
+    const startX = Math.random() * window.innerWidth;
+    const startY = window.innerHeight;
+
+    blob.style.position = 'fixed';
+    blob.style.width = `${size}px`;
+    blob.style.height = `${size}px`;
+    blob.style.background = 'white';
+    blob.style.borderRadius = '50%';
+    blob.style.left = `${startX}px`;
+    blob.style.top = `${startY}px`;
+    blob.style.zIndex = 9999;
+    blob.style.pointerEvents = 'none';
+    blob.style.opacity = 0.7;
+    blob.style.transition = 'top 1s ease-out, left 1s ease-out';
+    document.body.appendChild(blob);
+
+    setTimeout(() => {
+      const dx = (Math.random() - 0.5) * 800;
+      const dy = -(Math.random() * 600 + 300);
+      blob.style.left = `${startX + dx}px`;
+      blob.style.top = `${startY + dy}px`;
+    }, 20);
+  }
+};
+
+shootMoreWhiteLiquidUpward();
+</p>
+    <h1>Clock Chaos</h1>
+    <p>const shootClockworkChaos = () => {
+  const count = 5;
+  for (let i = 0; i < count; i++) {
+    const gear = document.createElement('div');
+    const size = Math.random() * 40 + 60;
+    const startX = Math.random() * window.innerWidth;
+    const startY = Math.random() * window.innerHeight;
+
+    gear.style.position = 'fixed';
+    gear.style.width = `${size}px`;
+    gear.style.height = `${size}px`;
+    gear.style.borderRadius = '50%';
+    gear.style.backgroundColor = 'white';
+    gear.style.border = `${Math.random() * 10 + 10}px solid black`; 
+    gear.style.left = `${startX}px`;
+    gear.style.top = `${startY}px`;
+    gear.style.zIndex = 9999;
+    gear.style.pointerEvents = 'none';
+    gear.style.animation = `spin-gear ${Math.random() * 5 + 3}s linear infinite`;
+
+    gear.style.boxShadow = `0 0 0 10px #888 inset`;
+
+    // Add clock marks
+    const marksCount = 12;
+    for (let j = 0; j < marksCount; j++) {
+      const mark = document.createElement('div');
+      const markSize = 5;
+      const angle = (j * 360) / marksCount;
+      const radius = size / 2 - 10;
+
+      mark.style.position = 'absolute';
+      mark.style.width = `${markSize}px`;
+      mark.style.height = `${markSize}px`;
+      mark.style.backgroundColor = 'black';
+      mark.style.borderRadius = '50%';
+      mark.style.left = `${(size / 2) + radius * Math.cos((angle - 90) * (Math.PI / 180)) - markSize / 2}px`;
+      mark.style.top = `${(size / 2) + radius * Math.sin((angle - 90) * (Math.PI / 180)) - markSize / 2}px`;
+
+      gear.appendChild(mark);
+    }
+
+    // Add clock hands
+    const addHand = (length, width, color, rotationDeg) => {
+      const hand = document.createElement('div');
+      hand.style.position = 'absolute';
+      hand.style.width = `${width}px`;
+      hand.style.height = `${length}px`;
+      hand.style.backgroundColor = color;
+      hand.style.top = `${size / 2 - length / 2}px`;
+      hand.style.left = `${size / 2 - width / 2}px`;
+      hand.style.transformOrigin = '50% 100%';
+      hand.style.transform = `rotate(${rotationDeg}deg)`;  // Apply rotation based on the time
+      gear.appendChild(hand);
+      return hand;
+    };
+
+    // 12:38 time adjustment:
+    const secondHandDeg = 0; // Start at the 0 seconds (no movement for the second hand)
+    const minuteHandDeg = 38 * 6; // 38 minutes, each minute moves 6 degrees
+    const hourHandDeg = 19; // 12:38, 19 degrees past 12
+
+    // Add the second hand (black and slim)
+    addHand(size / 2 - 5, 1, 'black', secondHandDeg); 
+
+    // Add the minute hand (black and slim)
+    addHand(size / 2 - 15, 2, 'black', minuteHandDeg); 
+
+    // Add the hour hand (black and slim)
+    addHand(size / 2 - 25, 3, 'black', hourHandDeg); 
+
+    document.body.appendChild(gear);
+
+    setTimeout(() => {
+      document.body.removeChild(gear);
+    }, 5000);
+  }
+};
+
+setInterval(shootClockworkChaos, 1000);  // Continuous gear spinning
+
+const style = document.createElement('style');
+style.innerHTML = `
+  @keyframes spin-gear {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
+document.head.appendChild(style);
+</p>
     <script src="index.js"></script>
 </body>
 </html>
