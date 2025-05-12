@@ -985,7 +985,6 @@ shootMoreWhiteLiquidUpward();
 
     gear.style.boxShadow = `0 0 0 10px #888 inset`;
 
-    // Add clock marks
     const marksCount = 12;
     for (let j = 0; j < marksCount; j++) {
       const mark = document.createElement('div');
@@ -1004,7 +1003,6 @@ shootMoreWhiteLiquidUpward();
       gear.appendChild(mark);
     }
 
-    // Add clock hands
     const addHand = (length, width, color, rotationDeg) => {
       const hand = document.createElement('div');
       hand.style.position = 'absolute';
@@ -1014,23 +1012,17 @@ shootMoreWhiteLiquidUpward();
       hand.style.top = `${size / 2 - length / 2}px`;
       hand.style.left = `${size / 2 - width / 2}px`;
       hand.style.transformOrigin = '50% 100%';
-      hand.style.transform = `rotate(${rotationDeg}deg)`;  // Apply rotation based on the time
+      hand.style.transform = `rotate(${rotationDeg}deg)`;
       gear.appendChild(hand);
       return hand;
     };
 
-    // 12:38 time adjustment:
-    const secondHandDeg = 0; // Start at the 0 seconds (no movement for the second hand)
-    const minuteHandDeg = 38 * 6; // 38 minutes, each minute moves 6 degrees
-    const hourHandDeg = 19; // 12:38, 19 degrees past 12
+    const secondHandDeg = 0;
+    const minuteHandDeg = 38 * 6;
+    const hourHandDeg = 19;
 
-    // Add the second hand (black and slim)
     addHand(size / 2 - 5, 1, 'black', secondHandDeg); 
-
-    // Add the minute hand (black and slim)
     addHand(size / 2 - 15, 2, 'black', minuteHandDeg); 
-
-    // Add the hour hand (black and slim)
     addHand(size / 2 - 25, 3, 'black', hourHandDeg); 
 
     document.body.appendChild(gear);
@@ -1041,7 +1033,7 @@ shootMoreWhiteLiquidUpward();
   }
 };
 
-setInterval(shootClockworkChaos, 1000);  // Continuous gear spinning
+setInterval(shootClockworkChaos, 1000);
 
 const style = document.createElement('style');
 style.innerHTML = `
