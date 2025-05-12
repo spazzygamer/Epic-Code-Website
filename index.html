@@ -1044,6 +1044,128 @@ style.innerHTML = `
 `;
 document.head.appendChild(style);
 </p>
+    <h1>Portal Randomize</h1>
+    <p>const portalJump = () => {
+  const count = 10;
+  const portalSize = 100;
+  const startY = 0; 
+  const portalAnimationDuration = 3;
+  
+  for (let i = 0; i < count; i++) {
+    const portal = document.createElement('div');
+    const startX = Math.random() * window.innerWidth;
+
+    portal.style.position = 'absolute';
+    portal.style.width = `${portalSize}px`;
+    portal.style.height = `${portalSize}px`;
+    portal.style.borderRadius = '50%';
+    portal.style.background = 'radial-gradient(circle, rgba(255,255,255,0.6) 50%, rgba(0,0,0,0.7) 100%)';
+    portal.style.left = `${startX}px`;
+    portal.style.top = `${startY}px`;
+    portal.style.zIndex = 9999;
+    portal.style.pointerEvents = 'none';
+    portal.style.animation = `portalEffect 5s infinite alternate`;
+    portal.style.boxShadow = '0 0 20px rgba(0, 255, 255, 0.7)';
+
+    document.body.appendChild(portal);
+
+    setTimeout(() => {
+      const elements = document.querySelectorAll('body *');
+      elements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (
+          el === portal ||
+          el.tagName === 'SCRIPT' ||
+          el.tagName === 'STYLE' ||
+          el.tagName === 'HTML' ||
+          el.tagName === 'BODY' ||
+          el === document.body
+        ) return;
+
+        const elCenterX = rect.left + rect.width / 2;
+        const elCenterY = rect.top + rect.height / 2;
+        const distanceX = startX - elCenterX;
+        const distanceY = startY - elCenterY;
+
+        const newX = Math.random() * window.innerWidth;
+        const newY = Math.random() * window.innerHeight;
+
+        el.style.transition = `transform ${portalAnimationDuration}s ease-out, opacity ${portalAnimationDuration}s ease-out`;
+        el.style.transform = `translate(${distanceX}px, ${distanceY}px) scale(0.5)`;
+        el.style.opacity = '0';
+
+        setTimeout(() => {
+          el.style.transition = `transform 1s ease-out, opacity 1s ease-out`;
+          el.style.transform = `translate(${newX}px, ${newY}px) scale(1)`;
+          el.style.opacity = '1';
+        }, portalAnimationDuration * 1000);
+      });
+    }, Math.random() * 1000 + 1000);
+  }
+};
+
+portalJump();
+
+const style = document.createElement('style');
+style.innerHTML = `
+  @keyframes portalEffect {
+    0% { transform: scale(0.1); opacity: 0.5; }
+    50% { transform: scale(1.5); opacity: 1; }
+    100% { transform: scale(0.1); opacity: 0.5; }
+  }
+`;
+document.head.appendChild(style);
+</p>
+    <h1>Portals</h1>
+    <p>const portalJump = () => {
+  const count = 50;
+  const portalSize = 100;
+  const portalAnimationDuration = 3;
+
+  for (let i = 0; i < count; i++) {
+    const portal = document.createElement('div');
+    const startX = Math.random() * window.innerWidth;
+    const startY = Math.random() * window.innerHeight;
+
+    portal.style.position = 'absolute';
+    portal.style.width = `${portalSize}px`;
+    portal.style.height = `${portalSize}px`;
+    portal.style.borderRadius = '50%';
+    portal.style.background = 'radial-gradient(circle, rgba(255,255,255,0.6) 50%, rgba(0,0,0,0.7) 100%)';
+    portal.style.left = `${startX}px`;
+    portal.style.top = `${startY}px`;
+    portal.style.zIndex = 9999;
+    portal.style.pointerEvents = 'none';
+    portal.style.animation = `portalEffect 5s infinite alternate`;
+    portal.style.boxShadow = '0 0 20px rgba(0, 255, 255, 0.7)';
+
+    document.body.appendChild(portal);
+
+    const movePortal = () => {
+      const newX = Math.random() * window.innerWidth;
+      const newY = Math.random() * window.innerHeight;
+
+      portal.style.transition = `left ${portalAnimationDuration}s ease-in-out, top ${portalAnimationDuration}s ease-in-out`;
+      portal.style.left = `${newX}px`;
+      portal.style.top = `${newY}px`;
+    };
+
+    setInterval(movePortal, portalAnimationDuration * 1000);
+  }
+};
+
+portalJump();
+
+const style = document.createElement('style');
+style.innerHTML = `
+  @keyframes portalEffect {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+  }
+`;
+document.head.appendChild(style);
+</p>
     <script src="index.js"></script>
 </body>
 </html>
