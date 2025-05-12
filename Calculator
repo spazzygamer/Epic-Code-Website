@@ -1,0 +1,107 @@
+const calculator = document.createElement('div');
+calculator.style.position = 'fixed';
+calculator.style.top = '100px';
+calculator.style.left = '100px';
+calculator.style.background = '#1c1c1c';
+calculator.style.color = 'white';
+calculator.style.padding = '20px';
+calculator.style.borderRadius = '10px';
+calculator.style.boxShadow = '0 0 20px rgba(0,0,0,0.5)';
+calculator.style.zIndex = '99999';
+calculator.style.fontFamily = 'sans-serif';
+calculator.style.width = '350px';
+calculator.style.cursor = 'move';
+
+calculator.innerHTML = `
+  <div id="header" style="font-weight: bold; margin-bottom: 10px; color: black;">🧮 Calculator</div>
+  <input id="calcInput" style="width: 100%; font-size: 18px; padding: 10px; border: none; border-radius: 5px; color: black;" placeholder="e.g. 1/2 + 3/4" />
+  <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; margin-top: 10px;">
+    <button onclick="addToInput('7')" style="color: black;">7</button>
+    <button onclick="addToInput('8')" style="color: black;">8</button>
+    <button onclick="addToInput('9')" style="color: black;">9</button>
+    <button onclick="addToInput('/')" style="color: black;">÷</button>
+    <button onclick="addToInput('4')" style="color: black;">4</button>
+    <button onclick="addToInput('5')" style="color: black;">5</button>
+    <button onclick="addToInput('6')" style="color: black;">6</button>
+    <button onclick="addToInput('*')" style="color: black;">×</button>
+    <button onclick="addToInput('1')" style="color: black;">1</button>
+    <button onclick="addToInput('2')" style="color: black;">2</button>
+    <button onclick="addToInput('3')" style="color: black;">3</button>
+    <button onclick="addToInput('-')" style="color: black;">−</button>
+    <button onclick="addToInput('0')" style="color: black;">0</button>
+    <button onclick="addToInput('.')" style="color: black;">.</button>
+    <button onclick="evalCalc()" style="color: black;">=</button>
+    <button onclick="addToInput('+')" style="color: black;">+</button>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; margin-top: 10px;">
+    <button onclick="addToInput('sin(')" style="color: black;">sin</button>
+    <button onclick="addToInput('cos(')" style="color: black;">cos</button>
+    <button onclick="addToInput('tan(')" style="color: black;">tan</button>
+    <button onclick="addToInput('√')" style="color: black;">√</button>
+    <button onclick="addToInput('log(')" style="color: black;">log</button>
+    <button onclick="addToInput('ln(')" style="color: black;">ln</button>
+    <button onclick="addToInput('π')" style="color: black;">π</button>
+    <button onclick="addToInput('e')" style="color: black;">e</button>
+  </div>
+  <div style="margin-top: 10px;">
+    <button onclick="clearCalc()" style="color: black;">Clear</button>
+  </div>
+  <div id="calcResult" style="margin-top: 15px; font-size: 18px;"></div>
+`;
+
+document.body.appendChild(calculator);
+
+window.addToInput = function (value) {
+  document.getElementById('calcInput').value += value;
+};
+
+window.evalCalc = function () {
+  let input = document.getElementById('calcInput').value;
+
+  input = input.replace(/(\d+)\/(\d+)/g, (match, p1, p2) => {
+    return (parseFloat(p1) / parseFloat(p2)).toString();
+  });
+
+  input = input
+    .replace(/π/g, 'Math.PI')
+    .replace(/e/g, 'Math.E')
+    .replace(/√/g, 'Math.sqrt')
+    .replace(/sin/g, 'Math.sin')
+    .replace(/cos/g, 'Math.cos')
+    .replace(/tan/g, 'Math.tan')
+    .replace(/log/g, 'Math.log10')
+    .replace(/ln/g, 'Math.log')
+    .replace(/\^/g, '**');
+
+  try {
+    const result = eval(input);
+    document.getElementById('calcResult').textContent = `Result: ${result}`;
+  } catch {
+    document.getElementById('calcResult').textContent = 'Invalid expression';
+  }
+};
+
+window.clearCalc = function () {
+  document.getElementById('calcInput').value = '';
+  document.getElementById('calcResult').textContent = '';
+};
+
+let isDragging = false, offsetX = 0, offsetY = 0;
+const header = document.getElementById('header');
+
+header.addEventListener('mousedown', e => {
+  isDragging = true;
+  offsetX = e.clientX - calculator.offsetLeft;
+  offsetY = e.clientY - calculator.offsetTop;
+});
+
+document.addEventListener('mousemove', e => {
+  if (isDragging) {
+    calculator.style.left = `${e.clientX - offsetX}px`;
+    calculator.style.top = `${e.clientY - offsetY}px`;
+  }
+});
+
+document.addEventListener('mouseup', () => {
+  isDragging = false;
+});
