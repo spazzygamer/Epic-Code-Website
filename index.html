@@ -1478,6 +1478,64 @@ style.innerHTML = `
 `;
 document.head.appendChild(style);
 </p>
+    <h1>Drawing: Double click to erase all</h1>
+    <p>javascript:(function() {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  resizeCanvas();
+  
+  canvas.style.position = 'fixed';
+  canvas.style.top = '0';
+  canvas.style.left = '0';
+  canvas.style.zIndex = '999999';
+  canvas.style.pointerEvents = 'auto';
+  canvas.style.cursor = 'crosshair';
+  document.body.appendChild(canvas);
+
+  let drawing = false;
+  const savedLineWidth = localStorage.getItem('lineWidth') || 10;
+  ctx.lineWidth = parseInt(savedLineWidth);
+  ctx.lineCap = 'round';
+  ctx.strokeStyle = 'black';
+
+  canvas.addEventListener('mousedown', (e) => {
+    drawing = true;
+    ctx.beginPath();
+    ctx.moveTo(e.clientX, e.clientY);
+  });
+
+  canvas.addEventListener('mousemove', (e) => {
+    if (drawing) {
+      ctx.lineTo(e.clientX, e.clientY);
+      ctx.stroke();
+    }
+  });
+
+  canvas.addEventListener('mouseup', () => {
+    drawing = false;
+  });
+
+  canvas.addEventListener('dblclick', () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  });
+
+  window.addEventListener('resize', resizeCanvas);
+
+  window.setLineWidth = function(value) {
+    ctx.lineWidth = value;
+    localStorage.setItem('lineWidth', value);
+    console.log(`Line width set to ${value}`);
+  };
+
+  console.log("Drawing tool active. Click and drag to draw. Double-click to clear.");
+})();
+</p>
     <script src="index.js"></script>
 </body>
 </html>
