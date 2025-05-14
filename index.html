@@ -1168,6 +1168,79 @@ style.innerHTML = `
 `;
 document.head.appendChild(style);
 </p>
+    <h1>Car Mayhem</h1>
+    <p>const emojis = ['🚗','🚓','🚕','🚙'];
+const explosion = '💥';
+const carCount = 80;
+const cars = [];
+
+for (let i = 0; i < carCount; i++) {
+  const car = document.createElement('div');
+  car.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+  car.style.position = 'fixed';
+  car.style.fontSize = `${30 + Math.random() * 30}px`;
+  car.style.left = `${Math.random() * window.innerWidth}px`;
+  car.style.top = `${Math.random() * window.innerHeight}px`;
+  car.style.zIndex = 99999;
+  car.style.pointerEvents = 'none';
+  car.style.transition = 'transform 0.05s linear';
+  document.body.appendChild(car);
+
+  cars.push({
+    el: car,
+    x: parseFloat(car.style.left),
+    y: parseFloat(car.style.top),
+    angle: Math.random() * 360,
+    speed: 1 + Math.random() * 4,
+    turnSpeed: (Math.random() - 0.5) * 5,
+    size: parseFloat(car.style.fontSize),
+    cooldown: 0
+  });
+}
+
+setInterval(() => {
+  cars.forEach((car, i) => {
+    car.cooldown = Math.max(0, car.cooldown - 1);
+    car.angle += car.turnSpeed;
+    const rad = car.angle * Math.PI / 180;
+    car.x += Math.cos(rad) * car.speed;
+    car.y += Math.sin(rad) * car.speed;
+
+    if (car.x < -car.size || car.x > window.innerWidth + car.size || car.y < -car.size || car.y > window.innerHeight + car.size) {
+      car.x = Math.random() * window.innerWidth;
+      car.y = Math.random() * window.innerHeight;
+      car.angle = Math.random() * 360;
+    }
+
+    for (let j = i + 1; j < cars.length; j++) {
+      const other = cars[j];
+      const dx = car.x - other.x;
+      const dy = car.y - other.y;
+      const dist = Math.hypot(dx, dy);
+      if (dist < (car.size + other.size) / 2 && car.cooldown === 0 && other.cooldown === 0) {
+        car.cooldown = other.cooldown = 20;
+        car.angle += 180 + (Math.random() - 0.5) * 90;
+        other.angle += 180 + (Math.random() - 0.5) * 90;
+
+        const boom = document.createElement('div');
+        boom.textContent = explosion;
+        boom.style.position = 'fixed';
+        boom.style.left = `${(car.x + other.x) / 2}px`;
+        boom.style.top = `${(car.y + other.y) / 2}px`;
+        boom.style.fontSize = '40px';
+        boom.style.zIndex = 100000;
+        boom.style.pointerEvents = 'none';
+        document.body.appendChild(boom);
+        setTimeout(() => boom.remove(), 300);
+      }
+    }
+
+    car.el.style.left = `${car.x}px`;
+    car.el.style.top = `${car.y}px`;
+    car.el.style.transform = `rotate(${car.angle}deg)`;
+  });
+}, 30);
+</p>
     <script src="index.js"></script>
 </body>
 </html>
