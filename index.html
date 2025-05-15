@@ -1367,6 +1367,161 @@ function animate() {
 
 animate();
 </p>
+    <h1>Rocket</h1>
+    <p>const ship = document.createElement('div');
+ship.style.position = 'fixed';
+ship.style.width = '0';
+ship.style.height = '0';
+ship.style.borderLeft = '20px solid transparent';
+ship.style.borderRight = '20px solid transparent';
+ship.style.borderBottom = '40px solid gray';
+ship.style.left = '50%';
+ship.style.top = '50%';
+ship.style.transform = 'translate(-50%, -50%) rotate(0deg)';
+ship.style.zIndex = '99999';
+ship.style.transition = 'transform 0.05s linear';
+
+const tip = document.createElement('div');
+tip.style.position = 'absolute';
+tip.style.bottom = '100%';
+tip.style.left = '50%';
+tip.style.transform = 'translateX(-50%)';
+tip.style.width = '0';
+tip.style.height = '0';
+tip.style.borderLeft = '10px solid transparent';
+tip.style.borderRight = '10px solid transparent';
+tip.style.borderBottom = '15px solid red';
+ship.appendChild(tip);
+
+document.body.appendChild(ship);
+
+let x = window.innerWidth / 2;
+let y = window.innerHeight / 2;
+let angle = 0;
+let speed = 0;
+
+const keys = {};
+document.addEventListener('keydown', e => keys[e.key.toLowerCase()] = true);
+document.addEventListener('keyup', e => keys[e.key.toLowerCase()] = false);
+
+function spawnSmoke(x, y, angle) {
+  const smoke = document.createElement('div');
+  smoke.style.position = 'fixed';
+  smoke.style.width = '8px';
+  smoke.style.height = '8px';
+  smoke.style.background = 'gray';
+  smoke.style.borderRadius = '50%';
+  smoke.style.left = `${x}px`;
+  smoke.style.top = `${y}px`;
+  smoke.style.opacity = '0.6';
+  smoke.style.zIndex = '99998';
+  smoke.style.pointerEvents = 'none';
+  document.body.appendChild(smoke);
+
+  const dx = Math.sin(angle * Math.PI / 180 + Math.PI) * 15;
+  const dy = -Math.cos(angle * Math.PI / 180 + Math.PI) * 15;
+  smoke.style.transform = `translate(${dx}px, ${dy}px)`;
+
+  setTimeout(() => {
+    smoke.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    smoke.style.opacity = '0';
+    smoke.style.transform += ' scale(2)';
+  }, 10);
+
+  setTimeout(() => {
+    smoke.remove();
+  }, 600);
+}
+
+function move() {
+  if (keys['w'] || keys['arrowup']) {
+    speed = Math.min(speed + 0.3, 6);
+    spawnSmoke(x, y, angle);
+  }
+  if (keys['s'] || keys['arrowdown']) speed = Math.max(speed - 0.3, -2);
+  if (keys['a'] || keys['arrowleft']) angle -= 5;
+  if (keys['d'] || keys['arrowright']) angle += 5;
+
+  x += Math.sin(angle * Math.PI / 180) * speed;
+  y -= Math.cos(angle * Math.PI / 180) * speed;
+
+  speed *= 0.96;
+
+  ship.style.left = `${x}px`;
+  ship.style.top = `${y}px`;
+  ship.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+
+  requestAnimationFrame(move);
+}
+move();
+</p>
+    <h1>Car</h1>
+    <p>const car = document.createElement('div');
+car.textContent = '🚗';
+car.style.position = 'fixed';
+car.style.fontSize = '40px';
+car.style.left = '50%';
+car.style.top = '50%';
+car.style.transform = 'translate(-50%, -50%)';
+car.style.zIndex = '99999';
+car.style.transition = 'transform 0.05s linear';
+document.body.appendChild(car);
+
+let x = window.innerWidth / 2;
+let y = window.innerHeight / 2;
+let dx = 0;
+let dy = 0;
+let speed = 8;
+
+const keys = {};
+document.addEventListener('keydown', e => keys[e.key.toLowerCase()] = true);
+document.addEventListener('keyup', e => keys[e.key.toLowerCase()] = false);
+
+function spawnSmoke(x, y) {
+  const smoke = document.createElement('div');
+  smoke.style.position = 'fixed';
+  smoke.style.width = '8px';
+  smoke.style.height = '8px';
+  smoke.style.background = 'gray';
+  smoke.style.borderRadius = '50%';
+  smoke.style.left = `${x}px`;
+  smoke.style.top = `${y + 12}px`;
+  smoke.style.opacity = '0.6';
+  smoke.style.zIndex = '99998';
+  smoke.style.pointerEvents = 'none';
+  document.body.appendChild(smoke);
+
+  setTimeout(() => {
+    smoke.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    smoke.style.opacity = '0';
+    smoke.style.transform = 'scale(2)';
+  }, 10);
+
+  setTimeout(() => {
+    smoke.remove();
+  }, 600);
+}
+
+function move() {
+  dx = 0;
+  dy = 0;
+  if (keys['w'] || keys['arrowup']) dy -= speed;
+  if (keys['s'] || keys['arrowdown']) dy += speed;
+  if (keys['a'] || keys['arrowleft']) dx -= speed;
+  if (keys['d'] || keys['arrowright']) dx += speed;
+
+  if (dx !== 0 || dy !== 0) spawnSmoke(x, y);
+
+  x += dx;
+  y += dy;
+
+  car.style.left = `${x}px`;
+  car.style.top = `${y}px`;
+
+  requestAnimationFrame(move);
+}
+move();
+</p>
     <script src="index.js"></script>
 </body>
 </html>
