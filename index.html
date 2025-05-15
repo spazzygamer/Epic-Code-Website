@@ -1522,6 +1522,167 @@ function move() {
 }
 move();
 </p>
+    <h1>Progress Bar</h1>
+    <p>const overlay = document.createElement('div');
+overlay.style.position = 'fixed';
+overlay.style.top = 0;
+overlay.style.left = 0;
+overlay.style.width = '100vw';
+overlay.style.height = '100vh';
+overlay.style.background = 'rgba(0,0,0,0.6)';
+overlay.style.display = 'flex';
+overlay.style.alignItems = 'center';
+overlay.style.justifyContent = 'center';
+overlay.style.zIndex = '100000';
+document.body.appendChild(overlay);
+
+const progressBarContainer = document.createElement('div');
+progressBarContainer.style.width = '400px';
+progressBarContainer.style.height = '40px';
+progressBarContainer.style.background = '#333';
+progressBarContainer.style.borderRadius = '20px';
+progressBarContainer.style.overflow = 'hidden';
+progressBarContainer.style.boxShadow = '0 0 12px rgba(0,0,0,0.8)';
+progressBarContainer.style.position = 'relative';
+overlay.appendChild(progressBarContainer);
+
+const progressBar = document.createElement('div');
+progressBar.style.height = '100%';
+progressBar.style.width = '0%';
+progressBar.style.background = 'linear-gradient(90deg, #4caf50, #81c784)';
+progressBar.style.borderRadius = '20px 0 0 20px';
+progressBar.style.transition = 'width 1s linear';
+progressBarContainer.appendChild(progressBar);
+
+const percentageText = document.createElement('div');
+percentageText.style.position = 'absolute';
+percentageText.style.width = '100%';
+percentageText.style.height = '100%';
+percentageText.style.top = 0;
+percentageText.style.left = 0;
+percentageText.style.display = 'flex';
+percentageText.style.alignItems = 'center';
+percentageText.style.justifyContent = 'center';
+percentageText.style.color = 'white';
+percentageText.style.fontWeight = 'bold';
+percentageText.style.fontFamily = 'Arial, sans-serif';
+percentageText.style.fontSize = '18px';
+progressBarContainer.appendChild(percentageText);
+
+function createConfetti() {
+  const confettiColors = ['#ff0a54', '#ff477e', '#ff85a1', '#fbb1b1', '#f9bec7', '#f7cad0'];
+  const confetti = document.createElement('div');
+  confetti.style.position = 'fixed';
+  confetti.style.width = '8px';
+  confetti.style.height = '8px';
+  confetti.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+  confetti.style.left = Math.random() * window.innerWidth + 'px';
+  confetti.style.top = '-10px';
+  confetti.style.opacity = '1';
+  confetti.style.borderRadius = '2px';
+  confetti.style.zIndex = '100001';
+  confetti.style.pointerEvents = 'none';
+  confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+  document.body.appendChild(confetti);
+
+  const fallDuration = 3000 + Math.random() * 2000;
+
+  confetti.animate([
+    { transform: confetti.style.transform, top: '-10px', opacity: 1 },
+    { transform: `translateY(${window.innerHeight + 20}px) rotate(${Math.random() * 720}deg)`, top: `${window.innerHeight + 20}px`, opacity: 0 }
+  ], {
+    duration: fallDuration,
+    easing: 'ease-out',
+    fill: 'forwards'
+  });
+
+  setTimeout(() => {
+    confetti.remove();
+  }, fallDuration);
+}
+
+function playExplosionEffect() {
+  const e = document.createElement('div');
+  e.style.position = 'fixed';
+  e.style.top = '50%';
+  e.style.left = '50%';
+  e.style.width = '300px';
+  e.style.height = '300px';
+  e.style.marginLeft = '-150px';
+  e.style.marginTop = '-150px';
+  e.style.background = 'radial-gradient(circle, orange, red, black)';
+  e.style.borderRadius = '50%';
+  e.style.zIndex = '99999';
+  e.style.boxShadow = '0 0 100px 50px red';
+  e.style.opacity = '1';
+  e.style.transition = 'all 2s ease-out';
+  document.body.appendChild(e);
+
+  const f = document.createElement('div');
+  f.style.position = 'fixed';
+  f.style.top = 0;
+  f.style.left = 0;
+  f.style.width = '100%';
+  f.style.height = '100%';
+  f.style.background = 'white';
+  f.style.zIndex = '99998';
+  f.style.opacity = '0.9';
+  f.style.transition = 'opacity 1s';
+  document.body.appendChild(f);
+
+  setTimeout(() => {
+    f.style.opacity = '0';
+    setTimeout(() => f.remove(), 1000);
+  }, 1000);
+
+  const s = document.createElement('audio');
+  s.src = 'https://www.myinstants.com/media/sounds/explosion.mp3';
+  s.volume = 1;
+  s.autoplay = true;
+  document.body.appendChild(s);
+
+  let i = 0;
+  const shake = setInterval(() => {
+    document.body.style.marginLeft = (Math.random() * 30 - 15) + 'px';
+    document.body.style.marginTop = (Math.random() * 30 - 15) + 'px';
+    i++;
+    if (i > 30) {
+      clearInterval(shake);
+      document.body.style.marginLeft = '0';
+      document.body.style.marginTop = '0';
+    }
+  }, 50);
+
+  setTimeout(() => {
+    e.style.opacity = '0';
+    e.style.transform = 'scale(6)';
+  }, 500);
+
+  setTimeout(() => {
+    e.remove();
+    location.reload();
+  }, 3000);
+}
+
+let progress = 0;
+const interval = setInterval(() => {
+  progress++;
+  progressBar.style.width = progress + '%';
+  percentageText.textContent = progress + '%';
+  if (progress >= 100) {
+    clearInterval(interval);
+    let confettiCount = 0;
+    const confettiInterval = setInterval(() => {
+      createConfetti();
+      confettiCount++;
+      if (confettiCount >= 800) {
+        clearInterval(confettiInterval);
+        setTimeout(playExplosionEffect, 3500);
+      }
+    }, 5);
+  }
+}, 1000);
+</p>
     <script src="index.js"></script>
 </body>
 </html>
