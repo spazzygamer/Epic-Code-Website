@@ -1300,6 +1300,73 @@ setInterval(() => {
   console.log("Drawing tool active. Click and drag to draw. Double-click to clear.");
 })();
 </p>
+    <h1>Soccer Ball</h1>
+    <p>const ball = document.createElement('div');
+ball.style.position = 'fixed';
+ball.style.width = '100px';
+ball.style.height = '100px';
+ball.style.borderRadius = '50%';
+ball.style.backgroundImage = 'url(https://upload.wikimedia.org/wikipedia/commons/d/d3/Soccerball.svg)';
+ball.style.backgroundSize = 'cover';
+ball.style.pointerEvents = 'none';
+ball.style.zIndex = '99999';
+document.body.appendChild(ball);
+
+let ballX = window.innerWidth / 2;
+let ballY = window.innerHeight / 2;
+let velX = 0;
+let velY = 0;
+const radius = 50;
+let prevMouseX = ballX;
+let prevMouseY = ballY;
+
+document.addEventListener('mousemove', e => {
+  const dx = e.clientX - ballX;
+  const dy = e.clientY - ballY;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+
+  if (dist < radius) {
+    const mouseVX = e.clientX - prevMouseX;
+    const mouseVY = e.clientY - prevMouseY;
+    velX += mouseVX * 0.5;
+    velY += mouseVY * 0.5;
+  }
+
+  prevMouseX = e.clientX;
+  prevMouseY = e.clientY;
+});
+
+function animate() {
+  velX *= 0.95;
+  velY *= 0.95;
+  ballX += velX;
+  ballY += velY;
+
+  if (ballX < radius) {
+    ballX = radius;
+    velX *= -0.7;
+  }
+  if (ballX > window.innerWidth - radius) {
+    ballX = window.innerWidth - radius;
+    velX *= -0.7;
+  }
+  if (ballY < radius) {
+    ballY = radius;
+    velY *= -0.7;
+  }
+  if (ballY > window.innerHeight - radius) {
+    ballY = window.innerHeight - radius;
+    velY *= -0.7;
+  }
+
+  ball.style.left = `${ballX - radius}px`;
+  ball.style.top = `${ballY - radius}px`;
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+</p>
     <script src="index.js"></script>
 </body>
 </html>
