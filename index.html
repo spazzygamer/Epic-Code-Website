@@ -1683,6 +1683,63 @@ const interval = setInterval(() => {
   }
 }, 1000);
 </p>
+    <h1>DVD</h1>
+    <p>const dvd = document.createElement('div');
+dvd.style.position = 'fixed';
+dvd.style.width = '200px';
+dvd.style.height = '100px';
+dvd.style.background = '#0ff';
+dvd.style.color = '#000';
+dvd.style.fontSize = '40px';
+dvd.style.fontWeight = 'bold';
+dvd.style.fontFamily = 'sans-serif';
+dvd.style.display = 'flex';
+dvd.style.alignItems = 'center';
+dvd.style.justifyContent = 'center';
+dvd.style.zIndex = '99999';
+dvd.style.left = '0px';
+dvd.style.top = '0px';
+dvd.style.pointerEvents = 'none';
+dvd.textContent = 'DVD';
+document.body.appendChild(dvd);
+
+let x = Math.random() * (window.innerWidth - 200);
+let y = Math.random() * (window.innerHeight - 100);
+let dx = 4;
+let dy = 4;
+
+function randomColor() {
+  return `hsl(${Math.floor(Math.random() * 360)}, 100%, 50%)`;
+}
+
+function move() {
+  x += dx;
+  y += dy;
+
+  let hit = false;
+
+  if (x + 200 >= window.innerWidth || x <= 0) {
+    dx *= -1;
+    hit = true;
+  }
+
+  if (y + 100 >= window.innerHeight || y <= 0) {
+    dy *= -1;
+    hit = true;
+  }
+
+  if (hit) {
+    dvd.style.background = randomColor();
+  }
+
+  dvd.style.left = `${x}px`;
+  dvd.style.top = `${y}px`;
+
+  requestAnimationFrame(move);
+}
+
+move();
+</p>
     <script src="index.js"></script>
 </body>
 </html>
