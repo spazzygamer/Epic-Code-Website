@@ -931,39 +931,6 @@ document.body.innerHTML = '';
   }
 })();
 </p>
-    <h1>Cream</h1>
-    <p>const shootMoreWhiteLiquidUpward = () => {
-  const count = 500;
-  for (let i = 0; i < count; i++) {
-    const blob = document.createElement('div');
-    const size = Math.random() * 25 + 10;
-    const startX = Math.random() * window.innerWidth;
-    const startY = window.innerHeight;
-
-    blob.style.position = 'fixed';
-    blob.style.width = `${size}px`;
-    blob.style.height = `${size}px`;
-    blob.style.background = 'white';
-    blob.style.borderRadius = '50%';
-    blob.style.left = `${startX}px`;
-    blob.style.top = `${startY}px`;
-    blob.style.zIndex = 9999;
-    blob.style.pointerEvents = 'none';
-    blob.style.opacity = 0.7;
-    blob.style.transition = 'top 1s ease-out, left 1s ease-out';
-    document.body.appendChild(blob);
-
-    setTimeout(() => {
-      const dx = (Math.random() - 0.5) * 800;
-      const dy = -(Math.random() * 600 + 300);
-      blob.style.left = `${startX + dx}px`;
-      blob.style.top = `${startY + dy}px`;
-    }, 20);
-  }
-};
-
-shootMoreWhiteLiquidUpward();
-</p>
     <h1>Clock Chaos</h1>
     <p>const shootClockworkChaos = () => {
   const count = 5;
@@ -1743,3 +1710,4 @@ move();
     <script src="index.js"></script>
 </body>
 </html>
+
